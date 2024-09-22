@@ -1,38 +1,61 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 
-const mockTrackingData = {
-    '12345': {
-        status: 'In Transit',
-        location: 'New York, NY',
-        estimatedDelivery: '2024-09-25',
-        currentStep: 2, // Step in the progress bar (1: Shipped, 2: In Transit, 3: Out for Delivery, 4: Delivered)
-        history: [
-            { date: '2024-09-21', event: 'Package received at origin facility' },
-            { date: '2024-09-22', event: 'Package departed from facility' },
-            { date: '2024-09-23', event: 'Package arrived at sorting center' },
-        ],
-    },
-    '67890': {
-        status: 'Delivered',
-        location: 'Los Angeles, CA',
-        estimatedDelivery: '2024-09-20',
-        currentStep: 4,
-        history: [
-            { date: '2024-09-18', event: 'Package received at origin facility' },
-            { date: '2024-09-19', event: 'Package out for delivery' },
-            { date: '2024-09-20', event: 'Package delivered' },
-        ],
-    },
-};
-
-const progressSteps = ['Shipped', 'In Transit', 'Out for Delivery', 'Delivered'];
+// Progress steps to map with statuses
+const progressSteps = ['Pending', 'Received', 'In Transit', 'Out for Delivery', 'Delivered'];
 
 function TrackingPage() {
     const { trackingID } = useParams();
-    const trackingInfo = mockTrackingData[trackingID];
+    const [trackingInfo, setTrackingInfo] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        // Fetch tracking data from API on component load
+        const fetchTrackingData = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch(`/api/orders/${trackingID}`);
+                if (!response.ok) {
+                    throw new Error("Tracking ID not found");
+                }
+                const data = await response.json();
+                
+                // Process the response to match the structure we need
+                const processedTrackingInfo = {
+                    status: data.status,
+                    location: data.history && data.history.length > 0 
+                        ? data.history[data.history.length - 1].location 
+                        : 'Unknown',
+                    estimatedDelivery: data.estimatedDeliveryTime 
+                        ? new Date(data.estimatedDeliveryTime).toLocaleDateString() 
+                        : 'No estimated delivery time available',
+                    currentStep: data.currentStep + 1,
+                    history: data.history.map(event => ({
+                        date: new Date(event.updatedAt).toLocaleDateString(),
+                        event: event.event,
+                    })),
+                };
+                setTrackingInfo(processedTrackingInfo);
+                setLoading(false);
+            } catch (error) {
+                setLoading(false);
+                Swal.fire('Error', error.message, 'error');
+            }
+        };
+
+        fetchTrackingData();
+    }, [trackingID]);
+
+    if (loading) {
+        return (
+            <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
+                <h1 className="text-2xl font-bold text-gray-700">Loading Tracking Information...</h1>
+            </div>
+        );
+    }
 
     if (!trackingInfo) {
         return (

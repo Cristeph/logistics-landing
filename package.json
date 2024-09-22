@@ -1,6 +1,7 @@
 {
   "name": "logistics-landing",
   "version": "0.1.0",
+  "proxy": "https://logistics-api-h521.onrender.com",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -10,6 +11,7 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
     "react-scripts": "5.0.1",
+    "sweetalert2": "^11.14.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

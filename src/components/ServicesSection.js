@@ -5,17 +5,17 @@ function ServicesSection() {
         {
             title: "Express Delivery",
             description: "Same-day delivery with speed and safety in mind.",
-            icon: "https://themeperch.net/html/logistip/assets/images/service-image-3.jpg",
+            icon: "https://themeperch.net/html/logistip/assets/images/testimonial-5.jpg",
         },
         {
             title: "Cargo Services",
             description: "Heavy cargo shipping services for business needs.",
-            icon: "https://themeperch.net/html/logistip/assets/images/service-image-3.jpg",
+            icon: "https://themeperch.net/html/logistip/assets/images/service-ocean-1.jpg",
         },
         {
             title: "Worldwide Shipping",
             description: "Global delivery solutions, fast and reliable.",
-            icon: "https://themeperch.net/html/logistip/assets/images/service-image-3.jpg",
+            icon: "https://themeperch.net/html/logistip/assets/images/service-air-3.jpg",
         },
     ];
 

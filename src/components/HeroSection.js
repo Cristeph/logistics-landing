@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function HeroSection() {
+    const [trackingID, setTrackingID] = useState('');
+    const navigate = useNavigate();
+
+    const handleTrack = (e) => {
+        e.preventDefault();
+        if (trackingID) {
+            navigate(`/track/${trackingID}`);
+        } else {
+            alert("Please enter a tracking ID");
+        }
+    };
+
     return (
         <section
             className="bg-cover bg-center py-24 text-white"
@@ -18,15 +31,17 @@ function HeroSection() {
                 </p>
 
                 {/* Track Shipment Form */}
-                <form className="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto text-left">
+                <form onSubmit={handleTrack} className="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto text-left">
                     <label className="block text-gray-700 font-semibold mb-2">
                         Track Your Shipment:
                     </label>
                     <div className="flex">
                         <input
                             type="text"
+                            value={trackingID}
+                            onChange={(e) => setTrackingID(e.target.value)}
                             placeholder="Enter Tracking Number"
-                            className="w-full px-4 py-2 border rounded-l-md focus:outline-none"
+                            className="w-full px-4 py-2 border rounded-l-md focus:outline-none text-black"
                         />
                         <button
                             type="submit"

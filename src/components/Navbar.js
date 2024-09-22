@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
     const [navOpen, setNavOpen] = useState(false);
@@ -12,7 +13,7 @@ function Navbar() {
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
                 {/* Logo */}
                 <a href="/#" className="text-2xl font-bold text-[#0c0e37]">
-                    <img alt="Cristeph Logo" fetchpriority="high" loading="lazy" width="231" height="71" decoding="async" data-nimg="1" class="h-10 w-auto" style={{"color": "transparent"}} srcset="https://cristeph.vercel.app/_next/image?url=%2Fimages%2Flogo-transparent.png&w=256&q=75" />
+                    <img alt="Cristeph Logo" fetchpriority="high" loading="lazy" width="231" height="71" decoding="async" data-nimg="1" class="h-10 w-auto" style={{ "color": "transparent" }} srcset="https://cristeph.vercel.app/_next/image?url=%2Fimages%2Flogo-transparent.png&w=256&q=75" />
                 </a>
                 {/* Hamburger Icon */}
                 <div className="md:hidden">
@@ -71,23 +72,23 @@ function Navbar() {
                             Contact
                         </a>
                     </li>
-                    {/* Mobile Get a Quote button */}
+                    {/* Mobile Login / Signup button */}
                     <li className="md:hidden" onClick={toggleMenu}>
-                        <a
-                            href="/#"
+                        <Link
+                            to="/auth"
                             className="block bg-[#9d1111] text-white px-4 py-2 rounded hover:bg-red-700 mt-2"
                         >
-                            Get a Quote
-                        </a>
+                            Login / Signup
+                        </Link>
                     </li>
                 </ul>
-                {/* Desktop Get a Quote button */}
-                <a
-                    href="/#"
+                {/* Desktop Login / Signup button */}
+                <Link
+                    to="/auth"
                     className="hidden md:inline-block bg-[#9d1111] text-white px-4 py-2 rounded hover:bg-red-700"
                 >
-                    Get a Quote
-                </a>
+                    Login / Signup
+                </Link>
             </div>
         </nav>
     );

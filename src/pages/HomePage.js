@@ -8,7 +8,7 @@ import Testimonials from "components/Testimonials";
 import CallToAction from "components/CallToAction";
 import Footer from "components/Footer";
 
-function App() {
+function HomePage() {
   return (
     <div className="font-sans bg-gray-100">
       <Navbar />
@@ -23,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default HomePage;

@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
+import authBg from "assets/images/auth-bg.jpg";
 
-function AuthPage() {
+const AuthPage = () => {
     const [activeTab, setActiveTab] = useState('login');
 
     const switchToLogin = () => {
@@ -18,7 +19,7 @@ function AuthPage() {
                 className="min-h-[700px] bg-gray-100 flex justify-center items-center"
                 style={{
                     backgroundImage:
-                        "url('https://themeperch.net/html/logistip/assets/images/banner-1.jpg')",
+                        `url(${authBg})`,
                 }}
 
             >
@@ -52,7 +53,7 @@ function AuthPage() {
     );
 }
 
-function LoginForm() {
+const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -118,7 +119,7 @@ function LoginForm() {
 }
 
 
-function SignupForm({ switchToLogin }) {
+const SignupForm = ({ switchToLogin }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

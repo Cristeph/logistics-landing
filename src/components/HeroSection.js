@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import heroBg from "assets/images/hero-section.jpg";
 
-function HeroSection() {
+const HeroSection = () => {
     const [trackingID, setTrackingID] = useState('');
     const navigate = useNavigate();
 
@@ -19,7 +20,7 @@ function HeroSection() {
             className="bg-cover bg-center py-24 text-white"
             style={{
                 backgroundImage:
-                    "url('https://themeperch.net/html/logistip/assets/images/hero-2-bg.jpg')",
+                    `url(${heroBg})`,
             }}
         >
             <div className="container mx-auto px-4 text-center">
@@ -54,16 +55,10 @@ function HeroSection() {
 
                 <div className="mt-8">
                     <a
-                        href="/#"
+                        href="/#requestquotes"
                         className="bg-white text-[#0c0e37] px-6 py-3 rounded-full font-bold mr-2 hover:bg-gray-100"
                     >
                         Get Started
-                    </a>
-                    <a
-                        href="/#"
-                        className="bg-transparent border border-white text-white px-6 py-3 rounded-full font-bold hover:bg-[#0c0e37]"
-                    >
-                        Track Shipment
                     </a>
                 </div>
             </div>

@@ -1,26 +1,30 @@
 import React from "react";
+import fastDelivery from "assets/images/fast-delivery.svg";
+import trustedByClient from "assets/images/trusted-by-clients.svg";
+import support247 from "assets/images/247-support.svg";
+import realTimeTracking from "assets/images/real-time-tracking.svg";
 
-function FeaturesSection() {
+const FeaturesSection = () => {
     const features = [
         {
             title: "Fast Delivery",
             description: "We prioritize speed without compromising safety.",
-            icon: "https://themeperch.net/html/logistip/assets/images/service-image-3.jpg",
+            icon: fastDelivery,
         },
         {
             title: "Trusted by Clients",
             description: "Thousands of satisfied customers globally.",
-            icon: "https://themeperch.net/html/logistip/assets/images/service-image-3.jpg",
+            icon: trustedByClient,
         },
         {
             title: "24/7 Support",
             description: "Always here to assist you with your needs.",
-            icon: "https://themeperch.net/html/logistip/assets/images/service-image-3.jpg",
+            icon: support247,
         },
         {
             title: "Real-Time Tracking",
             description: "Track your shipment from pickup to delivery.",
-            icon: "https://themeperch.net/html/logistip/assets/images/service-image-3.jpg",
+            icon: realTimeTracking,
         },
     ];
 
@@ -36,7 +40,7 @@ function FeaturesSection() {
                             <img
                                 src={feature.icon}
                                 alt={feature.title}
-                                className="mx-auto mb-4"
+                                className="mx-auto mb-4 h-24"
                             />
                             <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                             <p className="text-gray-600">{feature.description}</p>

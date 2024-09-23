@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 
-function Booking() {
+const Booking = () => {
     const [activeTab, setActiveTab] = useState('create');
     const [orders, setOrders] = useState([]);
     const [formData, setFormData] = useState({

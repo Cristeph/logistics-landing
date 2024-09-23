@@ -1,21 +1,24 @@
 import React from "react";
+import expressDelivery from "assets/images/express-delivery.jpg";
+import cargoServies from "assets/images/cargo-service.jpg";
+import worldwideShipping from "assets/images/worldwide-shipping.jpg";
 
-function ServicesSection() {
+const ServicesSection = () => {
     const services = [
         {
             title: "Express Delivery",
             description: "Same-day delivery with speed and safety in mind.",
-            icon: "https://themeperch.net/html/logistip/assets/images/testimonial-5.jpg",
+            icon: expressDelivery,
         },
         {
             title: "Cargo Services",
             description: "Heavy cargo shipping services for business needs.",
-            icon: "https://themeperch.net/html/logistip/assets/images/service-ocean-1.jpg",
+            icon: cargoServies,
         },
         {
             title: "Worldwide Shipping",
             description: "Global delivery solutions, fast and reliable.",
-            icon: "https://themeperch.net/html/logistip/assets/images/service-air-3.jpg",
+            icon: worldwideShipping,
         },
     ];
 
@@ -34,7 +37,7 @@ function ServicesSection() {
                             <img
                                 src={service.icon}
                                 alt={service.title}
-                                className="mx-auto mb-4"
+                                className="mx-auto mb-4 h-52"
                             />
                             <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
                             <p className="text-gray-600">{service.description}</p>

@@ -1,12 +1,14 @@
 import React from "react";
+import requestQuoteBg from "assets/images/request-quote-bg.jpg";
 
-function RequestQuote() {
+const RequestQuote = () => {
     return (
         <section
+            id="requestquotes"
             className="py-16 bg-gray-50"
             style={{
                 backgroundImage:
-                    "url('https://cristeph.vercel.app/images/info-background.jpg')",
+                    `url(${requestQuoteBg})`,
             }}
         >
             <div className="container mx-auto px-4">

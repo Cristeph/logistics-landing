@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logoTransparent from "assets/images/logo-transparent.webp";
 
 const DashboardHeader = ({ toggleSidebar, isSidebarOpen, toggleHideSidebar, isSidebarHidden }) => {
 
@@ -17,7 +18,7 @@ const DashboardHeader = ({ toggleSidebar, isSidebarOpen, toggleHideSidebar, isSi
                             </svg>
                         </button>
                         <Link to="/" className="text-xl font-bold flex items-center lg:ml-2.5">
-                            <img alt="Cristeph Logo" fetchpriority="high" loading="lazy" width="231" height="71" decoding="async" data-nimg="1" className="h-10 w-auto" style={{ "color": "transparent" }} srcSet="https://cristeph.vercel.app/_next/image?url=%2Fimages%2Flogo-transparent.png&w=256&q=75" />
+                            <img alt="Cristeph Logo" fetchpriority="high" loading="lazy" width="231" height="71" decoding="async" data-nimg="1" className="h-10 w-auto" style={{ "color": "transparent" }} srcSet={logoTransparent} />
                         </Link>
                     </div>
                     <div className="items-center flex">

@@ -8,7 +8,7 @@ import Testimonials from "components/Testimonials";
 import CallToAction from "components/CallToAction";
 import Footer from "components/Footer";
 
-function HomePage() {
+const HomePage = () => {
   return (
     <div className="font-sans bg-gray-100">
       <Navbar />

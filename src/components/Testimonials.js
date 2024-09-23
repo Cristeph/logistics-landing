@@ -1,6 +1,6 @@
 import React from "react";
 
-function Testimonials() {
+const Testimonials = () => {
     const testimonials = [
         {
             quote:

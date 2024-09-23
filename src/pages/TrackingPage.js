@@ -7,7 +7,7 @@ import Footer from "components/Footer";
 // Progress steps to map with statuses
 const progressSteps = ['Pending', 'Received', 'In Transit', 'Out for Delivery', 'Delivered'];
 
-function TrackingPage() {
+const TrackingPage = () => {
     const { trackingID } = useParams();
     const [trackingInfo, setTrackingInfo] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -22,15 +22,15 @@ function TrackingPage() {
                     throw new Error("Tracking ID not found");
                 }
                 const data = await response.json();
-                
+
                 // Process the response to match the structure we need
                 const processedTrackingInfo = {
                     status: data.status,
-                    location: data.history && data.history.length > 0 
-                        ? data.history[data.history.length - 1].location 
+                    location: data.history && data.history.length > 0
+                        ? data.history[data.history.length - 1].location
                         : 'Unknown',
-                    estimatedDelivery: data.estimatedDeliveryTime 
-                        ? new Date(data.estimatedDeliveryTime).toLocaleDateString() 
+                    estimatedDelivery: data.estimatedDeliveryTime
+                        ? new Date(data.estimatedDeliveryTime).toLocaleDateString()
                         : 'No estimated delivery time available',
                     currentStep: data.currentStep + 1,
                     history: data.history.map(event => ({
@@ -51,18 +51,24 @@ function TrackingPage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
-                <h1 className="text-2xl font-bold text-gray-700">Loading Tracking Information...</h1>
-            </div>
+            <>
+                <Navbar />
+                <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
+                    <h1 className="text-2xl font-bold text-gray-700">Loading Tracking Information...</h1>
+                </div>
+            </>
         );
     }
 
     if (!trackingInfo) {
         return (
-            <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
-                <h1 className="text-2xl font-bold text-red-600">Tracking ID Not Found</h1>
-                <p className="text-lg text-gray-700">Please check the tracking number and try again.</p>
-            </div>
+            <>
+                <Navbar />
+                <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
+                    <h1 className="text-2xl font-bold text-red-600">Tracking ID Not Found</h1>
+                    <p className="text-lg text-gray-700">Please check the tracking number and try again.</p>
+                </div>
+            </>
         );
     }
 

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import logoTransparent from "assets/images/logo-transparent.webp";
 
-function Navbar() {
+const Navbar = () => {
     const [navOpen, setNavOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -13,7 +14,7 @@ function Navbar() {
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
                 {/* Logo */}
                 <a href="/#" className="text-2xl font-bold text-[#0c0e37]">
-                    <img alt="Cristeph Logo" fetchpriority="high" loading="lazy" width="231" height="71" decoding="async" data-nimg="1" className="h-10 w-auto" style={{ "color": "transparent" }} srcSet="https://cristeph.vercel.app/_next/image?url=%2Fimages%2Flogo-transparent.png&w=256&q=75" />
+                    <img alt="Cristeph Logo" fetchpriority="high" loading="lazy" width="231" height="71" decoding="async" data-nimg="1" className="h-10 w-auto" style={{ "color": "transparent" }} srcSet={logoTransparent} />
                 </a>
                 {/* Hamburger Icon */}
                 <div className="md:hidden">

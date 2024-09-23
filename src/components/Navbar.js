@@ -54,25 +54,26 @@ const Navbar = () => {
                         } md:flex space-x-6 md:space-x-6 absolute md:static bg-white w-full md:w-auto left-0 md:mt-0 mt-2 md:p-0 p-4`}
                 >
                     <li onClick={toggleMenu}>
-                        <a href="/#" className="block text-gray-600 hover:text-[#0c0e37] py-2">
+                        <a href="/#" className="block text-gray-600 text-bold hover:text-[#0c0e37] py-2">
                             Home
                         </a>
                     </li>
                     <li onClick={toggleMenu}>
-                        <a href="/#" className="block text-gray-600 hover:text-[#0c0e37] py-2">
+                        <a href="/#" className="block text-gray-600 text-bold hover:text-[#0c0e37] py-2">
                             Services
                         </a>
                     </li>
                     <li onClick={toggleMenu}>
-                        <a href="/#" className="block text-gray-600 hover:text-[#0c0e37] py-2">
-                            About
-                        </a>
-                    </li>
-                    <li onClick={toggleMenu}>
-                        <a href="/#" className="block text-gray-600 hover:text-[#0c0e37] py-2">
+                        <a href="/contact" className="block text-gray-600 text-bold hover:text-[#0c0e37] py-2">
                             Contact
                         </a>
                     </li>
+                    <li onClick={toggleMenu}>
+                        <a href="/faq" className="block text-gray-600 text-bold hover:text-[#0c0e37] py-2">
+                            FAQ
+                        </a>
+                    </li>
+
                     {/* Mobile Login / Signup button */}
                     <li className="md:hidden" onClick={toggleMenu}>
                         <Link

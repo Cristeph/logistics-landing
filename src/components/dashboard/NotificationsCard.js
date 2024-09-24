@@ -1,5 +1,4 @@
 import React from "react";
-import { FaPhone, FaComment } from "react-icons/fa";
 
 const NotificationsCard = () => {
   return (
@@ -14,7 +13,7 @@ const NotificationsCard = () => {
       
       <div className="flex items-center mb-4">
         <div className="w-full bg-gray-200 h-1">
-          <div className="bg-blue-500 h-1 w-1/2"></div>
+          <div className="bg-blue-500 h-1 w-full"></div>
         </div>
       </div>
 

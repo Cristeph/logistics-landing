@@ -6,6 +6,10 @@ import AuthPage from 'pages/AuthPage';
 import DashboardLayout from 'components/DashboardLayout';
 import Overview from 'pages/Overview';
 import Booking from 'pages/Booking';
+import Support from 'pages/Support';
+import Payment from 'pages/Payment';
+import Account from 'pages/AccountManagement';
+import Notifications from 'pages/Notifications';
 
 function App() {
   return (
@@ -20,6 +24,10 @@ function App() {
           <Route index element={<Overview />} />
           <Route path="overview" element={<Overview />} />
           <Route path="booking" element={<Booking />} />
+          <Route path="notifications" element={<Notifications />} />
+          <Route path="support" element={<Support />} />
+          <Route path="payment" element={<Payment />} />
+          <Route path="accountmanagement" element={<Account />} />
         </Route>
       </Routes>
     </Router>

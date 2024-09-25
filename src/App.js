@@ -17,6 +17,10 @@ const App = () => {
     fetch('/api/startup');
   },[]);
   // DO NOT TOUCH 
+import Support from 'pages/Support';
+import Payment from 'pages/Payment';
+import Account from 'pages/AccountManagement';
+import Notifications from 'pages/Notifications';
 
   return (
     <Router>
@@ -32,6 +36,10 @@ const App = () => {
           <Route index element={<Overview />} />
           <Route path="overview" element={<Overview />} />
           <Route path="booking" element={<Booking />} />
+          <Route path="notifications" element={<Notifications />} />
+          <Route path="support" element={<Support />} />
+          <Route path="payment" element={<Payment />} />
+          <Route path="accountmanagement" element={<Account />} />
         </Route>
       </Routes>
     </Router>

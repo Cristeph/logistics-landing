@@ -8,6 +8,10 @@ import Overview from 'pages/Overview';
 import Booking from 'pages/Booking';
 import FAQPage from 'pages/FAQPage';
 import ContactUs from 'pages/ContactUs';
+import Support from 'pages/Support';
+import Payment from 'pages/Payment';
+import Account from 'pages/AccountManagement';
+import Notifications from 'pages/Notifications';
 
 const App = () => {
   // DO NOT TOUCH 
@@ -17,10 +21,6 @@ const App = () => {
     fetch('/api/startup');
   },[]);
   // DO NOT TOUCH 
-import Support from 'pages/Support';
-import Payment from 'pages/Payment';
-import Account from 'pages/AccountManagement';
-import Notifications from 'pages/Notifications';
 
   return (
     <Router>

@@ -12,6 +12,7 @@ import Support from 'pages/Support';
 import Payment from 'pages/Payment';
 import Account from 'pages/AccountManagement';
 import Notifications from 'pages/Notifications';
+import Services from 'pages/Services';
 
 const App = () => {
   // DO NOT TOUCH 
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/faq" element={<FAQPage />} />
+        <Route path="/services" element={<Services />} />
         <Route path="dashboard/" element={<DashboardLayout />}>
           <Route index element={<Overview />} />
           <Route path="overview" element={<Overview />} />

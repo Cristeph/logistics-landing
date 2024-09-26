@@ -1,8 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
+
+// Create a custom marker icon
+const markerIcon = new L.Icon({
+    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+});
 
 // Progress steps to map with statuses
 const progressSteps = ['Pending', 'Received', 'In Transit', 'Out for Delivery', 'Delivered'];
@@ -36,6 +46,8 @@ const TrackingPage = () => {
                     history: data.history.map(event => ({
                         date: new Date(event.updatedAt).toLocaleDateString(),
                         event: event.event,
+                        latitude: event.latitude,
+                        longitude: event.longitude
                     })),
                 };
                 setTrackingInfo(processedTrackingInfo);
@@ -71,6 +83,11 @@ const TrackingPage = () => {
             </>
         );
     }
+
+    const { history } = trackingInfo;
+
+    const positions = history.map((event) => [event.latitude, event.longitude]);
+    
 
     return (
         <>
@@ -122,6 +139,20 @@ const TrackingPage = () => {
                             </li>
                         ))}
                     </ul>
+
+                    {/* Map Section */}
+                    <MapContainer center={positions[positions.length - 1]} zoom={5} style={{ height: '400px', width: '100%' }}>
+                        <TileLayer
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        />
+                        {positions.map((pos, idx) => (
+                            <Marker key={idx} position={pos} icon={markerIcon}>
+                                <Popup>{history[idx].event} <br /> {history[idx].location}</Popup>
+                            </Marker>
+                        ))}
+                        <Polyline positions={positions} color="red" />
+                    </MapContainer>
 
                     {/* FAQ Section */}
                     <div className="mt-10">

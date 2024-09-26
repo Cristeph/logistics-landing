@@ -59,7 +59,7 @@ const Navbar = () => {
                         </a>
                     </li>
                     <li onClick={toggleMenu}>
-                        <a href="/#" className="block text-gray-600 text-bold hover:text-[#0c0e37] py-2">
+                        <a href="/services" className="block text-gray-600 text-bold hover:text-[#0c0e37] py-2">
                             Services
                         </a>
                     </li>

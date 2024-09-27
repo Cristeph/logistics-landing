@@ -13,6 +13,7 @@ import Payment from 'pages/Payment';
 import Account from 'pages/AccountManagement';
 import Notifications from 'pages/Notifications';
 import Services from 'pages/Services';
+import Invoice from "pages/Invoice";
 
 const App = () => {
   // DO NOT TOUCH 
@@ -41,6 +42,7 @@ const App = () => {
           <Route path="notifications" element={<Notifications />} />
           <Route path="support" element={<Support />} />
           <Route path="payment" element={<Payment />} />
+          <Route path="payment/invoice" element={<Invoice />} />
           <Route path="accountmanagement" element={<Account />} />
         </Route>
       </Routes>

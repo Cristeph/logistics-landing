@@ -17,28 +17,16 @@ const Overview = () => {
       {/* <Stats /> */}
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-6">
         <div className="lg:col-span-5 md:col-span-2">
+          <TrackingOrders />
           <DashboardStats />
           <OrdersAnalytics />
         </div>
         <div className="lg:col-span-2 md:col-span-1">
           <OrderRequests />
-        </div>
-      </div>
-      <RecentOrders />
-
-      {/* Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-6">
-        <div className="lg:col-span-5 md:col-span-2">
-          <TrackingOrders />
-          <ShippingStatus /> 
-          <MyOrders />
-        </div>
-        <div className="lg:col-span-2 md:col-span-1">
           <NotificationsCard />
-          <SystemPerformance />
-          <AdminTasks />
         </div>
       </div>
+      <MyOrders />
     </div>
   );
 };

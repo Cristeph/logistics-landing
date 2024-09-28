@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <footer className="bg-gray-800 py-8 text-white">
             <div className="container mx-auto px-4 text-center md:flex md:justify-between">
-                <img alt="Cristeph Logo" fetchpriority="high" loading="lazy" width="231" height="71" decoding="async" data-nimg="1" class="w-[10rem] mb-6" style={{color: "transparent"}} srcSet={logoWhite} />
+                <img alt="Cristeph Logo" fetchpriority="high" loading="lazy" width="231" height="71" decoding="async" data-nimg="1" className="w-[10rem] mb-6" style={{color: "transparent"}} srcSet={logoWhite} />
                 <p className="mb-4 md:mb-0">© 2024 Cristeph. All rights reserved.</p>
                 <ul className="flex justify-center space-x-4">
                     <li>

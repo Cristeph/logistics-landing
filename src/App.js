@@ -14,6 +14,7 @@ import Account from 'pages/AccountManagement';
 import Notifications from 'pages/Notifications';
 import Services from 'pages/Services';
 import Invoice from "pages/Invoice";
+import Admin from "pages/Admin";
 
 const App = () => {
   // DO NOT TOUCH 
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="dashboard/" element={<DashboardLayout />}>
           <Route index element={<Overview />} />
           <Route path="overview" element={<Overview />} />
+          <Route path="admin" element={<Admin />} />
           <Route path="booking" element={<Booking />} />
           <Route path="notifications" element={<Notifications />} />
           <Route path="support" element={<Support />} />

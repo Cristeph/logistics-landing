@@ -17,7 +17,7 @@ const SystemPerformance = () => {
   ];
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+    <div className="bg-white p-6 rounded-lg shadow-md mb-8 mt-2">
       <h2 className="text-xl font-semibold text-gray-800 mb-4">System Performance</h2>
       {/* ResponsiveContainer will adjust the chart size to fit its container */}
       <div className="w-full h-72">

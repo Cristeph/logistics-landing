@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const OrderRequests = () => {
   return (
-    <div className="">
+    <div className="my-2">
       <div className="bg-white p-4 rounded-lg shadow-md mb-6">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-xl font-bold">Recent Order Requests</h1>

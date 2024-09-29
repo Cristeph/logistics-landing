@@ -14,8 +14,8 @@ const ShippingStatus = () => {
     { label: "Start", value: 0 },
     { label: "In Transit", value: 25 },
     { label: "Warehouse", value: 50 },
-    { label: "Out for Delivery", value: 75 },
-    { label: "Delivered", value: 100 },
+    { label: "Out for Delivery", value: 55 },
+    { label: "Delivered", value: 10 },
   ];
 
   const orders = [
@@ -37,24 +37,6 @@ const ShippingStatus = () => {
 
   return (
     <div className="my-4 space-y-8">
-      {/* Bar Chart for Shipment Progress */}
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-          Current Shipment Status
-        </h2>
-        <div className="w-full h-72">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={trackingData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="label" />
-              <YAxis />
-              <Tooltip />
-              <Bar dataKey="value" fill="#4F46E5" barSize={40} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-
       {/* Product Tracking Details */}
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h2 className="text-xl font-semibold text-gray-800 mb-4">
@@ -79,6 +61,23 @@ const ShippingStatus = () => {
             </p>
           </div>
         ))}
+      </div>
+      {/* Bar Chart for Shipment Progress */}
+      <div className="bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+          Current Shipment Status
+        </h2>
+        <div className="w-full h-72">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={trackingData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="label" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="value" fill="#4F46E5" barSize={40} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );

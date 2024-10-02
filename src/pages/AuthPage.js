@@ -81,7 +81,6 @@ const LoginForm = () => {
       if (response.ok) {
         // Store token in localStorage or cookies
         localStorage.setItem("token", data.token);
-        console.log(data);
         // Redirect to dashboard
         navigate("/dashboard");
       } else {

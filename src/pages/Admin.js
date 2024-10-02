@@ -28,7 +28,7 @@ const Admin = () => {
       console.log("Courier created successfully:", result);
     } catch (error) {
       console.error("Error creating courier:", error);
-      // Hadndle error (e.g., show an error message)
+      // Hadndle error (e.g., show an error messsage)
     }
     setShowCard(false);
   };

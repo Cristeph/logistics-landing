@@ -1,25 +1,31 @@
-import React from "react";
+// AddInvoice.jsx
+import React, { useState } from "react";
 
-const InvoiceCard = ({ invoice }) => {
-  const handleDownloadInvoice = () => {
-    // Logic to download or email the invoice
-    alert(`Invoice for Order ${invoice.orderId} has been downloaded.`);
-  };
+const AddInvoice = ({ orderId }) => {
+    const [invoice, setInvoice] = useState("");
 
-  return (
-    <div className="bg-white p-4 rounded-lg shadow-md space-y-2 my-2">
-      <h2 className="text-lg font-semibold">Invoice Details</h2>
-      <p><strong>Order ID:</strong> {invoice.orderId}</p>
-      <p><strong>Total Amount:</strong> ${invoice.totalAmount}</p>
-      <p><strong>Invoice Date:</strong> {invoice.date}</p>
-      <button
-        onClick={handleDownloadInvoice}
-        className="bg-blue-500 text-white py-2 px-4 rounded mt-4"
-      >
-        Download Invoice
-      </button>
-    </div>
-  );
+    const handleAddInvoice = () => {
+        // Handle invoice addition logic
+        console.log(`Invoice added for Order ID: ${orderId} - ${invoice}`);
+    };
+
+    return (
+        <div className="bg-white p-4 rounded shadow mt-4">
+            <h2 className="text-lg font-semibold mb-2">Add Invoice</h2>
+            <textarea
+                className="border p-2 rounded w-full mb-2"
+                placeholder="Enter invoice details"
+                value={invoice}
+                onChange={(e) => setInvoice(e.target.value)}
+            />
+            <button
+                className="bg-green-500 text-white px-4 py-2 rounded"
+                onClick={handleAddInvoice}
+            >
+                Add Invoice
+            </button>
+        </div>
+    );
 };
 
-export default InvoiceCard;
+export default AddInvoice;

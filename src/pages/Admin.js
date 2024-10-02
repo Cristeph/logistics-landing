@@ -51,6 +51,13 @@ const Admin = () => {
     orderId: 1,
     totalAmount: 300,
     date: "2024-09-24",
+      const result = await response.json();
+        console.log("Courier created successfully:", result);
+      } catch (error) {
+        console.error("Error creating courier:", error);
+        // Hadndle error (e.g., show an error message)
+      }
+      setShowCard(false);
   };
   return (
     <div className="m-4">

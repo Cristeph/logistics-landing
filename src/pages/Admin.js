@@ -5,6 +5,7 @@ import OrderRequests from "components/admin/OrderRequests";
 import TrackingOrders from "components/dashboard/TrackingOrders";
 import CourierCreationCard from "components/admin/CourierCreation";
 import CourierAssignmentCard from "components/admin/CourierAssignment";
+import GetPayment from "components/admin/GetUserPayment";
 
 const Admin = () => {
   const [showCard, setShowCard] = useState(false);
@@ -38,6 +39,7 @@ const Admin = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-6">
         <div className="lg:col-span-5 md:col-span-2">
           <TrackingOrders />
+          <GetPayment/>
         </div>
 
         <div className="lg:col-span-2 md:col-span-1">

@@ -1,22 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
 
-const data = [
-  { month: "Jan", value: 400 },
-  { month: "Feb", value: 800 },
-  { month: "Mar", value: 600 },
-  { month: "Apr", value: 13000 },
-  { month: "May", value: 900 },
-  { month: "Jun", value: 500 },
-  { month: "Jul", value: 700 },
-  { month: "Aug", value: 1000 },
-  { month: "Sep", value: 4000 },
-  { month: "Oct", value: 3000 },
-  { month: "Nov", value: 5000 },
-  { month: "Dec", value: 6000 },
-];
-
 const OrdersAnalytics = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const token = localStorage.getItem("token");
+
+      try {
+        const response = await fetch("/api/orders/my-orders", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch orders");
+        }
+
+        const orders = await response.json();
+        
+        // Process data for the chart
+        const orderSummary = orders.reduce((acc, order) => {
+          const month = new Date(order.createdAt).toLocaleString("default", { month: "short" });
+          if (!acc[month]) {
+            acc[month] = 0;
+          }
+          acc[month] += order.price; 
+          return acc;
+        }, {});
+
+        
+        const chartData = Object.entries(orderSummary).map(([month, value]) => ({
+          month,
+          value,
+        })).sort((a, b) => new Date(`1 ${a.month}`) - new Date(`1 ${b.month}`)); // Sort by month
+
+        setData(chartData);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
+  if (loading) {
+    return <p>Loading chart data...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
   return (
     <div className="my-4 bg-gray-50">
       <div className="bg-white p-4 rounded-lg shadow-md">

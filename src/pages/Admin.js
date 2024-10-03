@@ -6,6 +6,9 @@ import TrackingOrders from "components/dashboard/TrackingOrders";
 import CourierCreationCard from "components/admin/CourierCreation";
 import CourierAssignmentCard from "components/admin/CourierAssignment";
 import GetPayment from "components/admin/GetUserPayment";
+import NotificationSender from "components/admin/NotificationSender";
+import PaymentSummaryCard from "components/PaymentSummary";
+import PaymentTokenCard from "components/admin/CreateInvoice";
 
 const Admin = () => {
   const [showCard, setShowCard] = useState(false);
@@ -28,7 +31,6 @@ const Admin = () => {
       console.log("Courier created successfully:", result);
     } catch (error) {
       console.error("Error creating courier:", error);
-      // Handle error (e.g., show an error message)
     }
     setShowCard(false);
   };
@@ -39,50 +41,56 @@ const Admin = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-6">
         <div className="lg:col-span-5 md:col-span-2">
           <TrackingOrders />
-          <GetPayment/>
+          <GetPayment />
+          <PaymentTokenCard/>
+          <NotificationSender />
         </div>
 
         <div className="lg:col-span-2 md:col-span-1">
-          <button
-            onClick={() => setShowCard(true)}
-            className="bg-teal-500 text-white px-4 py-2 mt-5 rounded hover:bg-teal-600 w-full"
-          >
-            Create Courier
-          </button>
-
-          {showCard && (
-            <CourierCreationCard
-              onSubmit={handleCreateCourier}
-              onClose={() => setShowCard(false)}
-            />
-          )}
-          <button
-            onClick={() => setShowAssignmentCard(true)}
-            className="bg-teal-500 text-white px-4 py-2 mt-5 rounded hover:bg-teal-600 w-full"
-          >
-            Assign Courier
-          </button>
-
-          {showAssignmentCard && (
-            <CourierAssignmentCard
-              onClose={() => setShowAssignmentCard(false)}
-            />
-          )}
+          <PaymentSummaryCard/>
           <NotificationsCard />
+
+          <div className="bg-white shadow-lg rounded-lg p-5 mb-5">
+            <h2 className="text-2xl font-bold mb-2">Create Courier</h2>
+            <p className="text-gray-700 mb-4">
+              Fill in the details to create a new courier. Make sure to provide
+              accurate information.
+            </p>
+            <button
+              onClick={() => setShowCard(true)}
+              className="bg-teal-500 text-white px-4 py-2 rounded hover:bg-teal-600 w-full transition duration-200"
+            >
+              Create Courier
+            </button>
+            {showCard && (
+              <CourierCreationCard
+                onSubmit={handleCreateCourier}
+                onClose={() => setShowCard(false)}
+              />
+            )}
+          </div>
+
+          <div className="bg-white shadow-lg rounded-lg p-5">
+            <h2 className="text-2xl font-bold mb-2">Assign Courier</h2>
+            <p className="text-gray-700 mb-4">
+              Choose a courier to assign to a specific route or task. Ensure the
+              courier is available.
+            </p>
+            <button
+              onClick={() => setShowAssignmentCard(true)}
+              className="bg-teal-500 text-white px-4 py-2 rounded hover:bg-teal-600 w-full transition duration-200"
+            >
+              Assign Courier
+            </button>
+            {showAssignmentCard && (
+              <CourierAssignmentCard
+                onClose={() => setShowAssignmentCard(false)}
+              />
+            )}
+          </div>
         </div>
       </div>
-
       <OrderRequests />
-
-      {/* Additional Cards or Sections */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-6 mt-6">
-        <div className="lg:col-span-5 md:col-span-2">
-          {/* Placeholder for additional content */}
-        </div>
-        <div className="lg:col-span-2 md:col-span-1">
-          {/* Placeholder for additional content */}
-        </div>
-      </div>
     </div>
   );
 };

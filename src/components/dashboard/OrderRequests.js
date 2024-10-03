@@ -1,18 +1,90 @@
-import React from "react";
-import {
-  FaBox,
-  FaMapMarkerAlt,
-  FaUser,
-  FaSyncAlt,
-} from "react-icons/fa";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { FaBox, FaMapMarkerAlt, FaUser, FaSyncAlt } from "react-icons/fa";
+import OrderDetailsModal from "./OrderModal"; 
 
 const OrderRequests = () => {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedOrder, setSelectedOrder] = useState(null); 
+  const [modalVisible, setModalVisible] = useState(false); 
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await fetch("/api/orders/my-orders", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch orders");
+        }
+
+        const data = await response.json();
+        setOrders(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
+  const handleUpdate = async (updatedOrder) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`/api/orders/${updatedOrder._id}/status`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedOrder),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update order");
+      }
+
+      const data = await response.json();
+      setOrders((prevOrders) =>
+        prevOrders.map((order) => (order._id === data._id ? data : order))
+      );
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  if (loading) {
+    return <div className="text-center">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="text-red-500 text-center">{error}</div>;
+  }
+
+  const handleViewDetails = (order) => {
+    setSelectedOrder(order);
+    setModalVisible(true); // Show the modal
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
+    setSelectedOrder(null); 
+  };
+
   return (
     <div className="my-2">
       <div className="bg-white p-4 rounded-lg shadow-md mb-6">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-xl font-bold">Recent Order Requests</h1>
+          <h1 className="text-xl font-bold">Recent Orders</h1>
           <div className="flex space-x-3">
             <FaBox className="text-gray-500 cursor-pointer" />
             <FaSyncAlt className="text-gray-500 cursor-pointer" />
@@ -24,29 +96,26 @@ const OrderRequests = () => {
           </div>
         </div>
         <div className="overflow-y-auto max-h-96">
-          <OrderCard
-            orderId="#4523 - 5248"
-            date="Sep 04, 2024"
-            dropLocation="456, ak Industries, Manchester, UK"
-            pickupLocation="235, main flat, near ek park, Manchester, UK"
-            customer="Adam mark"
-          />
-          <OrderCard
-            orderId="#4523 - 4652"
-            date="Sep 01, 2024"
-            pickupLocation="235, main flat, Manchester, UK"
-            dropLocation="35, Second APK Apartment, London, UK"
-            customer="Ak Shan"
-          />
-          <OrderCard
-            orderId="#4523 - 3566"
-            date="Aug 26, 2024"
-            pickupLocation="123, Some Street, London, UK"
-            dropLocation="789, Another Place, Manchester, UK"
-            customer="John Doe"
-          />
+          {orders.length > 0 ? (
+            orders.map((order) => (
+              <OrderCard
+                key={order._id}
+                orderId={`#${order.trackingNumber}`}
+                date={new Date(order.createdAt).toLocaleDateString()}
+                dropLocation={`${order.dropoffAddress.street}, ${order.dropoffAddress.city}, ${order.dropoffAddress.country}`}
+                pickupLocation={`${order.pickupAddress.street}, ${order.pickupAddress.city}, ${order.pickupAddress.country}`}
+                customer={order.customer.name}
+                onViewDetails={() => handleViewDetails(order)} 
+              />
+            ))
+          ) : (
+            <p className="text-center text-gray-500">No recent orders found.</p>
+          )}
         </div>
       </div>
+      {modalVisible && (
+        <OrderDetailsModal order={selectedOrder} onClose={handleCloseModal} onUpdate={handleUpdate} />
+      )}
     </div>
   );
 };
@@ -57,6 +126,7 @@ const OrderCard = ({
   dropLocation,
   pickupLocation,
   customer,
+  onViewDetails,
 }) => (
   <div className="bg-gray-100 p-4 rounded-lg shadow-sm mb-4">
     <div className="flex justify-between items-center mb-2">
@@ -87,9 +157,9 @@ const OrderCard = ({
         <FaUser className="text-gray-500 mr-2" />
         <p className="text-sm text-gray-700">{customer}</p>
       </div>
-      <Link to="#" className="text-blue-500 text-sm font-semibold">
+      <button onClick={onViewDetails} className="text-blue-500 text-sm font-semibold">
         View Details
-      </Link>
+      </button>
     </div>
   </div>
 );

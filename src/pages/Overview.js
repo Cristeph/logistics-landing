@@ -6,6 +6,7 @@ import NotificationsCard from "components/dashboard/NotificationsCard";
 import OrderRequests from "components/dashboard/OrderRequests";
 import OrdersAnalytics from "components/dashboard/OrderAnalytics";
 import MyOrders from "components/dashboard/MyOrders";
+import PaymentSummaryCard from "components/PaymentSummary";
 
 const Overview = () => {
   return (
@@ -15,6 +16,7 @@ const Overview = () => {
         <div className="lg:col-span-5 md:col-span-2">
           <TrackingOrders />
           <DashboardStats />
+          <PaymentSummaryCard/>
           <OrdersAnalytics />
         </div>
         <div className="lg:col-span-2 md:col-span-1">
@@ -22,7 +24,8 @@ const Overview = () => {
           <NotificationsCard />
         </div>
       </div>
-      <MyOrders />
+      <OrderRequests />
+      {/* <MyOrders /> */}
     </div>
   );
 };

@@ -10,6 +10,8 @@ const items = [
 const Invoice = () => {
   const [selectedItems, setSelectedItems] = useState([{ name: items[0].name, price: items[0].price }]);
   const [total, setTotal] = useState(items[0].price);
+  const [orderId] = useState("66f1476fca02d838631d63ff"); // Replace with actual order ID
+  const [transactionId, setTransactionId] = useState("");
 
   const handleItemChange = (index, e) => {
     const newItems = [...selectedItems];
@@ -50,12 +52,47 @@ const Invoice = () => {
         // Handle successful payment here
         console.log('Payment successful:', response);
         alert('Payment successful! Reference: ' + response.reference);
+        
+        // Create payment token after successful payment
+        createPaymentToken(response.reference);
       },
       onClose: function () {
         alert('Payment window closed.');
       },
     });
     handler.openIframe();
+  };
+
+  const createPaymentToken = async (reference) => {
+    const token = localStorage.getItem('token'); // Get token from local storage
+    const paymentData = {
+      orderId: orderId,
+      amount: total,
+      method: "credit_card",
+      transactionId: reference, // Use the payment reference as transaction ID
+    };
+
+    try {
+      const response = await fetch('/api/payments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(paymentData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create payment token');
+      }
+
+      const result = await response.json();
+      console.log('Payment token created:', result);
+      alert('Payment token created successfully!');
+    } catch (error) {
+      console.error('Error creating payment token:', error);
+      alert('Error creating payment token: ' + error.message);
+    }
   };
 
   const handleSubmit = (e) => {

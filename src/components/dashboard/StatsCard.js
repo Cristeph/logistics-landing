@@ -1,28 +1,116 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaBox, FaMoneyBillWave, FaChartLine } from "react-icons/fa";
 
 const DashboardStats = () => {
+  const [stats, setStats] = useState({
+    totalOrders: 0,
+    totalMoney: 0,
+    totalPayments: 0,
+    recentPaymentDate: "",
+    loading: true,
+    error: null,
+  });
+
+  useEffect(() => {
+    const fetchPaymentsSummary = async () => {
+      const token = localStorage.getItem("token");
+
+      try {
+        const response = await fetch("/api/payments/", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch payments");
+        }
+
+        const payments = await response.json();
+        const totalPayments = payments.length;
+        const totalAmount = payments.reduce((acc, payment) => acc + payment.amount, 0);
+        const recentPaymentDate = payments.length
+          ? new Date(Math.max(...payments.map(payment => new Date(payment.createdAt)))).toLocaleDateString()
+          : "N/A";
+
+        setStats(prev => ({
+          ...prev,
+          totalPayments,
+          totalMoney: totalAmount.toFixed(2),
+          recentPaymentDate,
+        }));
+      } catch (error) {
+        setStats(prev => ({ ...prev, error: error.message }));
+      }
+    };
+
+    const fetchOrders = async () => {
+      const token = localStorage.getItem("token");
+
+      try {
+        const response = await fetch("/api/orders/my-orders", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch orders");
+        }
+
+        const data = await response.json();
+        const totalOrders = data.length;
+        const totalPrice = data.reduce((acc, order) => acc + order.price, 0);
+
+        setStats(prev => ({
+          ...prev,
+          totalOrders,
+          totalMoney: totalPrice.toFixed(2),
+        }));
+      } catch (error) {
+        setStats(prev => ({ ...prev, error: error.message }));
+      } finally {
+        setStats(prev => ({ ...prev, loading: false }));
+      }
+    };
+
+    fetchPaymentsSummary();
+    fetchOrders();
+  }, []);
+
+  if (stats.loading) {
+    return <p>Loading stats...</p>;
+  }
+
+  if (stats.error) {
+    return <p>Error: {stats.error}</p>;
+  }
+
   return (
-    <div className="flex space-x-4 bg-gray-50">
+    <div className="flex space-x-4 bg-gray-50 py-4">
       <Card
-        title="Total Order"
-        value="8,652"
+        title="Total Orders"
+        value={stats.totalOrders}
         icon={<FaBox className="text-yellow-500" />}
-        trend="8.5% Up from yesterday"
+        trend="8.5% Up from yesterday" // Example trend
         trendType="up"
       />
       <Card
         title="Total Money Received"
-        value="₦1,02,932"
+        value={`₦${stats.totalMoney.toLocaleString()}`} // Format the total money
         icon={<FaMoneyBillWave className="text-blue-500" />}
-        trend="1.3% Up from past week"
+        trend="1.3% Up from past week" // Example trend
         trendType="up"
       />
       <Card
-        title="Available Carries"
-        value="262"
+        title="Total Payments"
+        value={stats.totalPayments}
         icon={<FaChartLine className="text-green-500" />}
-        trend="4.3% Down from yesterday"
+        trend="4.3% Down from yesterday" // Example trend
         trendType="down"
       />
     </div>

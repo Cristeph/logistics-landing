@@ -7,6 +7,8 @@ import FeaturesSection from "components/FeaturesSection";
 import Testimonials from "components/Testimonials";
 import CallToAction from "components/CallToAction";
 import Footer from "components/Footer";
+import Services from "./Services";
+import ContactUs from "./ContactUs";
 
 const HomePage = () => {
   return (
@@ -17,7 +19,8 @@ const HomePage = () => {
       <RequestQuote />
       <FeaturesSection />
       <Testimonials />
-      <CallToAction />
+      <CallToAction /> 
+      <ContactUs/>
       <Footer />
     </div>
   );

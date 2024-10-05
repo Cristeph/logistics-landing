@@ -1,7 +1,4 @@
-import React from 'react';
-import Navbar from "components/Navbar";
-import Footer from "components/Footer";
-
+import React from 'react'; 
 const Services = () => {
     const servicesData = [
         {
@@ -32,8 +29,7 @@ const Services = () => {
     ];
 
     return (
-        <>
-            <Navbar />
+        <> 
             <div className="min-h-screen bg-gray-100 py-10">
                 <div className="max-w-6xl mx-auto px-6">
                     <h1 className="text-4xl font-bold text-[#0c0e37] mb-8 text-center">Our Services</h1>
@@ -41,7 +37,10 @@ const Services = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {servicesData.map((service, index) => (
-                            <div key={index} className="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition duration-300">
+                            <div     key={index} 
+                            data-aos="fade-up" 
+                            data-aos-delay={`${index * 300}`} // Add delay to each feature
+                          className="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition duration-300">
                                 <img
                                     src={service.image}
                                     alt={service.title}
@@ -54,8 +53,7 @@ const Services = () => {
                         ))}
                     </div>
                 </div>
-            </div>
-            <Footer />
+            </div> 
         </>
     );
 };

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import logoTransparent from "assets/images/logo-transparent.webp";
+import logoTransparent from  "assets/images/logo-transparent.webp";
+import { FaArrowRight } from "react-icons/fa6";
 
 const Navbar = () => {
     const [navOpen, setNavOpen] = useState(false);
@@ -9,8 +10,34 @@ const Navbar = () => {
         setNavOpen(!navOpen);
     };
 
+    const [scrolled, setScrolled] = useState(false);
+
+    // Function to check the scroll position
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 150) {  // You can adjust the scrollY value as needed
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+  
+    useEffect(() => {
+      // Add scroll event listener
+      window.addEventListener('scroll', handleScroll);
+  
+      // Cleanup event listener on component unmount
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, []);
+  
+    // Define the class name based on scroll state
+    let navbarClass = scrolled ? 'NavBarB scrolledNav' : 'NavBarB';
+  
+
     return (
-        <nav className="bg-white shadow-lg">
+        <nav className={navbarClass}>
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
                 {/* Logo */}
                 <a href="/#" className="text-2xl font-bold text-[#0c0e37]">
@@ -23,9 +50,9 @@ const Navbar = () => {
                         className="text-gray-800 focus:outline-none"
                     >
                         <svg
-                            className="w-6 h-6"
+                            className="w-6 h-6 zUlt"
                             fill="none"
-                            stroke="currentColor"
+                            stroke={scrolled ? 'black' : 'white'}  
                             viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg"
                         >
@@ -48,49 +75,95 @@ const Navbar = () => {
                         </svg>
                     </button>
                 </div>
-                {/* Navigation Links */}
-                <ul
-                    className={`${navOpen ? "block" : "hidden"
-                        } md:flex space-x-6 md:space-x-6 absolute md:static bg-white w-full md:w-auto left-0 md:mt-0 mt-2 md:p-0 p-4`}
-                >
-                    <li onClick={toggleMenu}>
-                        <a href="/#" className="block text-gray-600 text-bold hover:text-[#0c0e37] py-2">
+    
+                <ul className='flex topNav'    >
+                    <div className='flex innerTopNav'>
+       <li onClick={toggleMenu}>
+                        <a href="/#" className=" ">
                             Home
                         </a>
                     </li>
                     <li onClick={toggleMenu}>
-                        <a href="/services" className="block text-gray-600 text-bold hover:text-[#0c0e37] py-2">
+                        <a href="#services" className="">
                             Services
                         </a>
                     </li>
                     <li onClick={toggleMenu}>
-                        <a href="/contact" className="block text-gray-600 text-bold hover:text-[#0c0e37] py-2">
+                        <a href="#contact" className="">
                             Contact
                         </a>
                     </li>
                     <li onClick={toggleMenu}>
-                        <a href="/faq" className="block text-gray-600 text-bold hover:text-[#0c0e37] py-2">
+                        <a href="#faq" className="">
                             FAQ
                         </a>
                     </li>
 
-                    {/* Mobile Login / Signup button */}
-                    <li className="md:hidden" onClick={toggleMenu}>
-                        <Link
-                            to="/auth"
-                            className="block bg-[#9d1111] text-white px-4 py-2 rounded hover:bg-red-700 mt-2"
-                        >
-                            Login / Signup
-                        </Link>
-                    </li>
-                </ul>
-                {/* Desktop Login / Signup button */}
-                <Link
+                    </div>
+             
+
+                 <Link
                     to="/auth"
                     className="hidden md:inline-block bg-[#9d1111] text-white px-4 py-2 rounded hover:bg-red-700"
                 >
                     Login / Signup
                 </Link>
+                  
+                </ul>
+       
+            
+            </div>
+
+            <div className={`phoneNav ${navOpen ? 'openNavg' : ''}`}  >
+
+           <div className='CloseIc' onClick={toggleMenu}>
+             <FaArrowRight />
+            </div>
+
+   <ul className='  '    >
+                    <div className=' innerTopNav'>
+       <li onClick={toggleMenu}>
+                        <a href="/#" className=" ">
+                            Home
+                        </a>
+                    </li>
+                    <li onClick={toggleMenu}>
+                        <a href="#services" className="">
+                            Services
+                        </a>
+                    </li>
+                    <li onClick={toggleMenu}>
+                        <a href="#contact" className="">
+                            Contact
+                        </a>
+                    </li>
+                    <li onClick={toggleMenu}>
+                        <a href="#faq" className="">
+                            FAQ
+                        </a>
+                    </li>
+
+                    <li>
+
+                    <Link
+                    to="/auth"
+                    className="thaBtn"
+                >
+                    Login / Signup
+                </Link>
+                    </li>
+
+                    </div>
+             
+
+                 <Link
+                    to="/auth"
+                    className="hidden md:inline-block bg-[#9d1111] text-white px-4 py-2 rounded hover:bg-red-700"
+                >
+                    Login / Signup
+                </Link>
+                  
+                </ul>
             </div>
         </nav>
     );

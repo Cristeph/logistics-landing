@@ -91,7 +91,7 @@ const DashboardStats = () => {
   }
 
   return (
-    <div className="flex space-x-4 bg-gray-50 py-4">
+    <div className="flex space-x-4 bg-gray-50 p-4">
       <Card
         title="Total Orders"
         value={stats.totalOrders}

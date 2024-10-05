@@ -15,8 +15,18 @@ import Notifications from 'pages/Notifications';
 import Services from 'pages/Services';
 import Invoice from "pages/Invoice";
 import Admin from "pages/Admin";
+import AOS from 'aos';
+import 'aos/dist/aos.css';  // Import AOS styles
 
 const App = () => {
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,  // Set the duration for animations globally
+      offset: 200,     // Set the offset globally
+    });
+  }, []);  // Only initialize AOS once when the app loads
+
   // DO NOT TOUCH 
   useEffect(() => {
     // IT JUST WAKES UP THE HIBERNATING/SLEEP 

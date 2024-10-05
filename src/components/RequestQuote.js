@@ -11,14 +11,14 @@ const RequestQuote = () => {
                     `url(${requestQuoteBg})`,
             }}
         >
-            <div className="container mx-auto px-4">
+            <div data-aos="fade-up" className="container mx-auto px-4">
                 <h2 className="text-3xl font-bold text-center mb-12 text-white">
                     Request a Quote
                 </h2>
-                <form className="bg-white p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
+                <form className=" quoteform p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label className="block text-gray-700 font-semibold mb-2">
+                            <label className="block text-gray-700 dalabel mb-2">
                                 Full Name:
                             </label>
                             <input
@@ -28,7 +28,7 @@ const RequestQuote = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-gray-700 font-semibold mb-2">
+                            <label className="block text-gray-700 dalabel mb-2">
                                 Email Address:
                             </label>
                             <input
@@ -38,7 +38,7 @@ const RequestQuote = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-gray-700 font-semibold mb-2">
+                            <label className="block text-gray-700 dalabel mb-2">
                                 Package Details:
                             </label>
                             <input
@@ -48,7 +48,7 @@ const RequestQuote = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-gray-700 font-semibold mb-2">
+                            <label className="block text-gray-700 dalabel mb-2">
                                 Destination:
                             </label>
                             <input
@@ -61,7 +61,7 @@ const RequestQuote = () => {
                     <div className="mt-6 text-center">
                         <button
                             type="submit"
-                            className="bg-[#9d1111] text-white px-6 py-3 rounded-md hover:bg-red-700"
+                            className="bg-[#9d1111] text-white px-6 py-3 rounded-md hover:bg-red-700 daBTN"
                         >
                             Submit Request
                         </button>

@@ -23,8 +23,13 @@ const OrderDetailsModal = ({ order, onClose }) => { //onUpdate
         <div className="mb-4">
           <div className="flex items-center mb-2">
             <FaBox className="text-blue-500 mr-2" />
-            <p className="font-semibold">Order ID:</p>
+            <p className="font-semibold">Tracking ID:</p>
             <span className="ml-2">{trackingNumber}</span>
+          </div>
+          <div className="flex items-center mb-2">
+            <FaBox className="text-blue-500 mr-2" />
+            <p className="font-semibold">Order ID:</p>
+            <span className="ml-2">{order._id}</span>
           </div>
           <div className="flex items-center mb-2">
             <FaUser className="text-gray-500 mr-2" />

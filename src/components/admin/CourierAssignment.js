@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaSave, FaTimes } from "react-icons/fa";
+import Swal from "sweetalert2"; // Import SweetAlert
 
 const CourierAssignmentCard = ({ onClose }) => {
   const [courierId, setCourierId] = useState("");
@@ -28,11 +29,28 @@ const CourierAssignmentCard = ({ onClose }) => {
 
       const result = await response.json();
       console.log("Courier assigned successfully:", result);
-      // Optionally, you can reset the state or close the card
+
+      // Show success alert
+      Swal.fire({
+        title: 'Success!',
+        text: 'Courier assigned to order successfully.',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      });
+
+      // Optionally, reset the state or close the card
+      setCourierId("");
+      setOrderId("");
       onClose();
     } catch (error) {
       console.error("Error assigning courier:", error);
-      // Handle error (e.g., show an error message)
+      // Show error alert
+      Swal.fire({
+        title: 'Error!',
+        text: 'Failed to assign courier. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
     }
   };
 

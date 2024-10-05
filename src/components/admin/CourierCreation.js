@@ -1,23 +1,46 @@
 import React, { useState } from "react";
 import { FaSave, FaTimes } from "react-icons/fa";
+import Swal from "sweetalert2"; // Import SweetAlert
 
 const CourierCreationCard = ({ onSubmit, onClose }) => {
   const [name, setName] = useState("");
   const [vehicleType, setVehicleType] = useState("bike");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    
     e.preventDefault();
     const newCourier = {
       name,
       vehicleType,
     };
-    onSubmit(newCourier);
-    
-    // Reset form after submission
-    setName("");
-    setVehicleType("bike");
-  };
 
+    try {
+      // Call the onSubmit prop function for submission
+      await onSubmit(newCourier);
+
+      // Show success alert
+      Swal.fire({
+        title: 'Success!',
+        text: 'Courier created successfully.',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      });
+
+      // Reset form after submission
+      setName("");
+      setVehicleType("bike");
+      // Close the card
+      onClose();
+    } catch (error) {
+      // Show error alert
+      Swal.fire({
+        title: 'Error!',
+        text: 'Failed to create courier. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
+    }
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">

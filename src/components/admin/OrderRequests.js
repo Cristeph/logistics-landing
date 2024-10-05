@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaBox, FaMapMarkerAlt, FaUser, FaSyncAlt } from "react-icons/fa";
+import { FaBox, FaMapMarkerAlt, FaSyncAlt } from "react-icons/fa";
 import Swal from "sweetalert2"; // Import SweetAlert
 import OrderDetailsModal from "./OrderModal";
 

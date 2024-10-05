@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { FaMapMarkerAlt, FaUser, FaBox, FaTimes, FaSave } from "react-icons/fa";
-import Swal from "sweetalert2"; // Import SweetAlert
+import { FaUser, FaBox, FaTimes, FaSave } from "react-icons/fa";
 
 const OrderDetailsModal = ({ order, onClose, onUpdate }) => {
-  const [trackingNumber, setTrackingNumber] = useState(order ? order.trackingNumber : "");
+  const [trackingNumber] = useState(order ? order.trackingNumber : ""); // Track as read-only
   const [status, setStatus] = useState(order ? order.status : "");
 
   if (!order) return null;
 
   const handleUpdate = () => {
-    onUpdate({ ...order, trackingNumber, status });
+    onUpdate({ ...order, status }); // No need to update trackingNumber since it's read-only
     // Optionally close modal here if needed
   };
 
@@ -30,7 +29,7 @@ const OrderDetailsModal = ({ order, onClose, onUpdate }) => {
               <div className="flex items-center mb-2">
                 <FaBox className="text-blue-500 mr-2" />
                 <p className="font-semibold">Tracking ID:</p>
-                <span className="ml-2">{trackingNumber}</span>
+                <span className="ml-2">{trackingNumber}</span> {/* Display-only */}
               </div>
               <div className="flex items-center mb-2">
                 <FaUser className="text-gray-500 mr-2" />

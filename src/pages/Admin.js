@@ -9,8 +9,6 @@ import GetPayment from "components/admin/GetUserPayment";
 import NotificationSender from "components/admin/NotificationSender";
 import PaymentSummaryCard from "components/PaymentSummary";
 import PaymentTokenCard from "components/admin/CreateInvoice";
-import UpdateLocationCard from "components/admin/UpdateLocationCard";
-import PaymentBillingCard from "components/admin/Payment";
 
 const Admin = () => {
   const [showCard, setShowCard] = useState(false);
@@ -47,15 +45,12 @@ const Admin = () => {
         <div className="lg:col-span-5 md:col-span-2">
           <TrackingOrders />
           <GetPayment />
-          <PaymentBillingCard />
-
-          <PaymentTokenCard />
+          <PaymentTokenCard/>
           <NotificationSender />
         </div>
 
         <div className="lg:col-span-2 md:col-span-1">
-          <PaymentSummaryCard />
-          <UpdateLocationCard />
+          <PaymentSummaryCard/>
           <NotificationsCard />
 
           <div className="bg-white shadow-lg rounded-lg p-5 mb-5">

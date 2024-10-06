@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const PaymentBillingCard = () => {
+const PaymentBillingComponent = () => {
   const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchPayments = async () => {
-      const token = localStorage.getItem("token"); 
+      const token = localStorage.getItem("token"); // Get the token from local storage
 
       try {
         const response = await fetch("/api/payments/", {
@@ -44,8 +44,8 @@ const PaymentBillingCard = () => {
   }
 
   return (
-    <div className="">
-      <div className="flex justify-between mb-4">
+    <div className="p-6 min-h-screen">
+      <div className="flex justify-between">
         <h1 className="text-2xl font-bold">Payment and Billing</h1>
         <Link to="/dashboard/payment/invoice">
           <button className="px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-600">
@@ -53,13 +53,13 @@ const PaymentBillingCard = () => {
           </button>
         </Link>
       </div>
-      <div className="bg-white rounded-lg shadow-md p-6">
-        {payments.length === 0 ? (
-          <div className="text-center p-4">
-            <p className="text-gray-500">No payments available.</p>
-          </div>
-        ) : (
-          <div className="overflow-x-auto">
+      <div className="bg-white rounded-lg shadow-md my-10">
+        <div className="overflow-x-auto">
+          {payments.length === 0 ? (
+            <div className="text-center p-4">
+              <p className="text-gray-500">No payments available.</p>
+            </div>
+          ) : (
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
@@ -96,11 +96,11 @@ const PaymentBillingCard = () => {
                 ))}
               </tbody>
             </table>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
-export default PaymentBillingCard;
+export default PaymentBillingComponent;

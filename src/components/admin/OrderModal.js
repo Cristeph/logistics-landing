@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { FaUser, FaBox, FaTimes, FaSave } from "react-icons/fa";
+import { FaMapMarkerAlt, FaUser, FaBox, FaTimes, FaEdit, FaSave } from "react-icons/fa";
 
 const OrderDetailsModal = ({ order, onClose, onUpdate }) => {
-  const [trackingNumber] = useState(order ? order.trackingNumber : ""); // Track as read-only
+  // Declare state hooks at the top
+  const [trackingNumber, setTrackingNumber] = useState(order ? order.trackingNumber : "");
   const [status, setStatus] = useState(order ? order.status : "");
 
   if (!order) return null;

@@ -7,7 +7,7 @@ const Sidebar = ({ isSidebarOpen }) => {
     const handleLogout = () => {
         // redirect to home page
         navigate('/');
-    }
+    } 
 
     return (
         <aside id="sidebar" className={`fixed ${isSidebarOpen ? 'flex' : 'hidden'}  z-20 h-full top-0 left-0 pt-16 lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75`} aria-label="Sidebar">

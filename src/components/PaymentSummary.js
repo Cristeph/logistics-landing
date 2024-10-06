@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const PaymentSummaryCard = () => {
   const [summary, setSummary] = useState({
     totalPayments: 0,
-    totalAmount: 0,
+    totalAmount: 0, 
     recentPaymentDate: "",
   });
 

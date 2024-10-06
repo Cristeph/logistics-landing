@@ -36,7 +36,7 @@ const ServicesSection = () => {
       description:
         "Comprehensive international freight shipping by air, sea, or land, ensuring secure and timely delivery of large shipments worldwide.",
       icon: cargoServies,
-    },
+    }, 
     {
       title: "Track And Trace",
       description:
@@ -98,8 +98,8 @@ const ServicesSection = () => {
                       />
                     </div>
                     <div>
-                      {" "}
-                      <a> Get quote</a>{" "}
+            
+                      <a href="#requestquotes"> Get quote</a>
                     </div>
                   </div>
                 </div>

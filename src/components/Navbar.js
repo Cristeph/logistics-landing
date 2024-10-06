@@ -9,7 +9,7 @@ const Navbar = () => {
     const toggleMenu = () => {
         setNavOpen(!navOpen);
     };
-
+ 
     const [scrolled, setScrolled] = useState(false);
 
     // Function to check the scroll position

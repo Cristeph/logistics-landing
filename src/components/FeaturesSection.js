@@ -51,7 +51,7 @@ const FeaturesSection = () => {
                   <h3 className="text-xl header3 mb-2">{feature.title}</h3>
                   <p className=" white">{feature.description}</p>
                 </div>
-              </div>
+              </div> 
             </>
           ))}
         </div>

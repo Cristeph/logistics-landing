@@ -11,7 +11,7 @@ const CallToAction = () => {
       }}
     >
       <div data-aos="fade-up">
-        <h2 className="text-4xl font-bold mb-4">Ready to Ship with Us?</h2>
+        <h2 className="text-4xl font-bold mb-4">Ready to Ship with Us?</h2> 
         <p className="text-lg mb-6">
           Get a free quote today and experience the best logistics services.
         </p>

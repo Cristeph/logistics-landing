@@ -14,7 +14,7 @@ const HeroSection = () => {
     } else {
       alert("Please enter a tracking ID");
     }
-  };
+  }; 
 
   return (
     <div

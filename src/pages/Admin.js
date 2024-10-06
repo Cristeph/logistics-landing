@@ -9,16 +9,21 @@ import GetPayment from "components/admin/GetUserPayment";
 import NotificationSender from "components/admin/NotificationSender";
 import PaymentSummaryCard from "components/PaymentSummary";
 import PaymentTokenCard from "components/admin/CreateInvoice";
+import UpdateLocationCard from "components/admin/UpdateLocationCard";
+import PaymentBillingCard from "components/admin/Payment";
 
 const Admin = () => {
   const [showCard, setShowCard] = useState(false);
   const [showAssignmentCard, setShowAssignmentCard] = useState(false);
   const handleCreateCourier = async (courier) => {
+    const token = localStorage.getItem("token");
+
     try {
       const response = await fetch("/api/couriers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(courier),
       });
@@ -42,12 +47,15 @@ const Admin = () => {
         <div className="lg:col-span-5 md:col-span-2">
           <TrackingOrders />
           <GetPayment />
-          <PaymentTokenCard/>
+          <PaymentBillingCard />
+
+          <PaymentTokenCard />
           <NotificationSender />
         </div>
 
         <div className="lg:col-span-2 md:col-span-1">
-          <PaymentSummaryCard/>
+          <PaymentSummaryCard />
+          <UpdateLocationCard />
           <NotificationsCard />
 
           <div className="bg-white shadow-lg rounded-lg p-5 mb-5">

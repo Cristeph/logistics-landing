@@ -460,6 +460,11 @@ p{
                     color: #9d1111;
                     border-radius: 4px;
 }
+
+
+.phoneNav{
+                    display: none;
+}
 @media (max-width: 968px) {
                     .whyChoose{
                                         padding-top: 70px;

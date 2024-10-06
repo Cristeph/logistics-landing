@@ -47,7 +47,7 @@ const PaymentBillingComponent = () => {
     <div className="p-6 min-h-screen">
       <div className="flex justify-between">
         <h1 className="text-2xl font-bold">Payment and Billing</h1>
-        <Link to="invoice">
+        <Link to="/dashboard/payment/invoice">
           <button className="px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-600">
             Create New Invoice
           </button>

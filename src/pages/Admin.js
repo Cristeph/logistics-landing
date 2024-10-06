@@ -14,11 +14,14 @@ const Admin = () => {
   const [showCard, setShowCard] = useState(false);
   const [showAssignmentCard, setShowAssignmentCard] = useState(false);
   const handleCreateCourier = async (courier) => {
+    const token = localStorage.getItem("token");
+
     try {
       const response = await fetch("/api/couriers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(courier),
       });

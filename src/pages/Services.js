@@ -10,7 +10,7 @@ const Services = () => {
             title: "Freight Forwarding",
             description: "Our freight forwarding services include air, sea, and land options, with customized solutions for oversized and specialized cargo.",
             image: "https://cristeph.netlify.app/static/media/hero-section.babe9b414c56a2b7f51d.jpg",
-        },
+        }, 
         {
             title: "Customs Clearance",
             description: "We provide seamless customs clearance, handling all necessary documentation and ensuring compliance with international regulations.",

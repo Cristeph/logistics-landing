@@ -6,8 +6,7 @@ import RequestQuote from "components/RequestQuote";
 import FeaturesSection from "components/FeaturesSection";
 import Testimonials from "components/Testimonials";
 import CallToAction from "components/CallToAction";
-import Footer from "components/Footer";
-import Services from "./Services";
+import Footer from "components/Footer" ; 
 import ContactUs from "./ContactUs";
 
 const HomePage = () => {
@@ -16,7 +15,7 @@ const HomePage = () => {
       <Navbar />
       <HeroSection />
       <ServicesSection />
-      <RequestQuote />
+      <RequestQuote /> 
       <FeaturesSection />
       <Testimonials />
       <CallToAction /> 

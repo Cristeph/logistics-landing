@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logoTransparent from  "assets/images/logo-transparent.webp";
-import { FaArrowRight } from "react-icons/fa6";
+import { FaArrowRight } from "react-icons/fa6"; 
 
 const Navbar = () => {
     const [navOpen, setNavOpen] = useState(false);

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
-  FaSearch,
-  FaSlidersH,
+  FaSearch, 
   FaBox,
   FaMapMarkerAlt,
   FaUser,

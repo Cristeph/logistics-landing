@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as FiIcons from "react-icons/fa";
 import * as mdIcons from "react-icons/md";
 import * as BsIcons from "react-icons/bs";
@@ -7,54 +7,7 @@ import * as Io5Icons from "react-icons/io5";
 import * as GoIcons from "react-icons/go";
 const ContactUs = () => {
 
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        message: '',
-    });
-
-    const [errors, setErrors] = useState({});
-    const [isSubmitted, setIsSubmitted] = useState(false);
-
-    // Handle form field changes
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
-
-    // Basic form validation
-    const validateForm = () => {
-        let formErrors = {};
-        if (!formData.name) formErrors.name = 'Name is required';
-        if (!formData.email) {
-            formErrors.email = 'Email is required';
-        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-            formErrors.email = 'Email is invalid';
-        }
-        if (!formData.message) formErrors.message = 'Message is required';
-
-        return formErrors;
-    };
-
-    // Handle form submission
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const formErrors = validateForm();
-        setErrors(formErrors);
-
-        if (Object.keys(formErrors).length === 0) {
-            setIsSubmitted(true);
-            console.log('Form data:', formData);
-            // Clear the form
-            setFormData({ name: '', email: '', message: '' });
-        } else {
-            setIsSubmitted(false);
-        }
-    };
-
+ 
 
   return (
     <>
@@ -96,16 +49,10 @@ const ContactUs = () => {
         </div>
 
  <div className="contact-form-container">
-       
-            {isSubmitted && (
-                <div className="success-message">
-                    Thank you! Your message has been sent.
-                </div>
-            )}
+ 
 
             <form    data-aos="fade-left    "
-                // Add delay to each feature
-                   onSubmit={handleSubmit} className="contact-form">
+                className="contact-form">
                 <div className='contactformimg'>
 
                 </div>

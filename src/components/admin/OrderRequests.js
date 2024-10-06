@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { FaBox, FaMapMarkerAlt, FaUser, FaSyncAlt } from "react-icons/fa";
-import OrderDetailsModal from "./OrderModal"; 
+import { FaBox, FaMapMarkerAlt, FaSyncAlt } from "react-icons/fa";
+import Swal from "sweetalert2"; // Import SweetAlert
+import OrderDetailsModal from "./OrderModal";
 
 const OrderRequests = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedOrder, setSelectedOrder] = useState(null); 
-  const [modalVisible, setModalVisible] = useState(false); 
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -57,8 +58,25 @@ const OrderRequests = () => {
       setOrders((prevOrders) =>
         prevOrders.map((order) => (order._id === data._id ? data : order))
       );
+      setModalVisible(false);
+      setSelectedOrder(null);
+
+      // Show success alert
+      Swal.fire({
+        title: "Success!",
+        text: "Order status updated successfully.",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
     } catch (error) {
       setError(error.message);
+      // Show error alert
+      Swal.fire({
+        title: "Error!",
+        text: error.message,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
     }
   };
 
@@ -72,12 +90,12 @@ const OrderRequests = () => {
 
   const handleViewDetails = (order) => {
     setSelectedOrder(order);
-    setModalVisible(true); // Show the modal
+    setModalVisible(true);
   };
 
   const handleCloseModal = () => {
     setModalVisible(false);
-    setSelectedOrder(null); 
+    setSelectedOrder(null);
   };
 
   return (
@@ -105,7 +123,8 @@ const OrderRequests = () => {
                 dropLocation={`${order.dropoffAddress.street}, ${order.dropoffAddress.city}, ${order.dropoffAddress.country}`}
                 pickupLocation={`${order.pickupAddress.street}, ${order.pickupAddress.city}, ${order.pickupAddress.country}`}
                 customer={order.customer.name}
-                onViewDetails={() => handleViewDetails(order)} 
+                orderStatus={order.status}
+                onViewDetails={() => handleViewDetails(order)}
               />
             ))
           ) : (
@@ -114,7 +133,11 @@ const OrderRequests = () => {
         </div>
       </div>
       {modalVisible && (
-        <OrderDetailsModal order={selectedOrder} onClose={handleCloseModal} onUpdate={handleUpdate} />
+        <OrderDetailsModal
+          order={selectedOrder}
+          onClose={handleCloseModal}
+          onUpdate={handleUpdate}
+        />
       )}
     </div>
   );
@@ -126,6 +149,7 @@ const OrderCard = ({
   dropLocation,
   pickupLocation,
   customer,
+  orderStatus,
   onViewDetails,
 }) => (
   <div className="bg-gray-100 p-4 rounded-lg shadow-sm mb-4">
@@ -154,10 +178,14 @@ const OrderCard = ({
     </div>
     <div className="flex justify-between items-center">
       <div className="flex items-center">
-        <FaUser className="text-gray-500 mr-2" />
-        <p className="text-sm text-gray-700">{customer}</p>
+        <FaMapMarkerAlt className="text-blue-500 mr-2" />
+        <p className="text-sm text-gray-700 capitalize">Order Status: {orderStatus}</p>
       </div>
-      <button onClick={onViewDetails} className="text-blue-500 text-sm font-semibold">
+
+      <button
+        onClick={onViewDetails}
+        className="text-blue-500 text-sm font-semibold"
+      >
         View Details
       </button>
     </div>

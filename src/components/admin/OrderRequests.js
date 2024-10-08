@@ -14,7 +14,7 @@ const OrderRequests = () => {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("/api/orders/my-orders", {
+        const response = await fetch("/api/orders/admin", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

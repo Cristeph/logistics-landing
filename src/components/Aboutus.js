@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { IoCopy } from "react-icons/io5";
+  
 
 const Aboutus = ({ counters }) => {
   const elementsRef = useRef([]); // Store references to multiple elements

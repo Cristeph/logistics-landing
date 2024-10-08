@@ -55,9 +55,9 @@ const HeroSection = () => {
             />
             <button
               type="submit"
-              className="bg-[#9d1111] text-white px-4 py-2 rounded hover:bg-red-700"
+              className="bg-[#9d1111] text-white py-2 rounded hover:bg-red-700"
             
-            style={{fontSize: '13px'}}>
+            style={{fontSize: '12px',  minWidth: '100px'}}>
               Start Tracking
             </button>
 

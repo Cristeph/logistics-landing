@@ -2,6 +2,8 @@ import React from "react";
 import expressDelivery from "assets/images/location.svg";
 import cargoServies from "assets/images/ship.svg";
 import worldwideShipping from "assets/images/track.svg";
+import roadfr from "assets/images/road.svg";
+import airfr from "assets/images/air.svg";
 import { LuChevronRightCircle } from "react-icons/lu";
 
 const ServicesSection = () => {
@@ -26,34 +28,34 @@ const ServicesSection = () => {
     },
 
     {
-      title: "Express Delivery",
+      title: "Road Freight",
       description:
-        "Fast and reliable shipping for urgent packages, with same-day or guaranteed delivery across local, national, and international locations.",
-      icon: expressDelivery,
+        "Efficient and flexible ground transportation solutions for both short-haul and long-distance shipments, delivering goods safely across cities, states, and borders..",
+      icon: roadfr,
     },
     {
-      title: "Cargo Services",
+      title: "Ocean Freight",
       description:
-        "Comprehensive international freight shipping by air, sea, or land, ensuring secure and timely delivery of large shipments worldwide.",
+        "Cost-effective and eco-friendly shipping for large or bulky goods, with access to global ports for seamless international trade..",
       icon: cargoServies,
-    }, 
+    },
     {
-      title: "Track And Trace",
+      title: "Air Freight",
       description:
-        "Monitor your shipments in real-time from pickup to delivery, with instant updates via SMS or email notifications.",
-      icon: worldwideShipping,
+        "Fast, reliable, and high-priority air transport for time-sensitive cargo, connecting major global hubs to ensure timely deliveries.",
+      icon: airfr,
     },
   ];
 
   return (
-    <section className="py-16 bg-white">
+    <section    id="ourservices"  className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="headerSection">
-          <h1      data-aos="fade-up"
- 
-                   className=" Header">Explore our range of delivery solutions</h1>
+          <h1 data-aos="fade-up" className=" Header">
+            Explore our range of delivery solutions
+          </h1>
 
-          <p      data-aos="fade-up">
+          <p data-aos="fade-up">
             Whether you need express shipping for urgent packages or reliable
             global freight services, we've got you covered. Our comprehensive
             courier solutions are designed to meet every need
@@ -98,7 +100,6 @@ const ServicesSection = () => {
                       />
                     </div>
                     <div>
-            
                       <a href="#requestquotes"> Get quote</a>
                     </div>
                   </div>

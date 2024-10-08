@@ -1,0 +1,113 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import OrderModal from './DetailedOrderModal'; // Import the modal component
+
+function OrderTable() {
+    const [orders, setOrders] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [selectedOrder, setSelectedOrder] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const token = localStorage.getItem('token');
+    // Fetch orders based on the current page
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+                const response = await axios.get(`/api/orders/admin?page=${currentPage}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setOrders(response.data);
+                setTotalPages(response.data.totalPages);
+            } catch (error) {
+                console.error("Error fetching orders:", error);
+            }
+        };
+
+        fetchOrders();
+    }, [currentPage, isModalOpen, token]);
+
+    // Handle order click to open modal
+    const handleOrderClick = (order) => {
+        setSelectedOrder(order);
+        setIsModalOpen(true);
+    };
+
+    // Handle modal close
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setSelectedOrder(null);
+    };
+
+    return (
+        <div>
+            <div className="overflow-x-auto">
+                <table className="min-w-full table-auto border-collapse bg-white shadow-md rounded-lg overflow-hidden">
+                    <thead className="text-black">
+                        <tr>
+                            <th className="px-4 py-2 text-xs md:text-sm lg:text-base">Tracking Number</th>
+                            <th className="px-4 py-2 text-xs md:text-sm lg:text-base">Status</th>
+                            <th className="px-4 py-2 text-xs md:text-sm lg:text-base">Pickup Address</th>
+                            <th className="px-4 py-2 text-xs md:text-sm lg:text-base">Dropoff Address</th>
+                            <th className="px-4 py-2 text-xs md:text-sm lg:text-base">Customer</th>
+                            <th className="px-4 py-2 text-xs md:text-sm lg:text-base">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {orders.map((order) => (
+                            <tr key={order._id} onClick={() => handleOrderClick(order)} className="cursor-pointer hover:bg-gray-100">
+                                <td className="border px-2 py-1 md:px-4 md:py-2">{order.trackingNumber}</td>
+                                <td className="border px-2 py-1 md:px-4 md:py-2">{order.status}</td>
+                                <td className="border px-2 py-1 md:px-4 md:py-2">{order.pickupAddress.city}, {order.pickupAddress.state}</td>
+                                <td className="border px-2 py-1 md:px-4 md:py-2">{order.dropoffAddress.city}, {order.dropoffAddress.state}</td>
+                                <td className="border px-2 py-1 md:px-4 md:py-2">{order.customer.name}</td>
+                                <td className="border px-2 py-1 md:px-4 md:py-2">
+                                    <button className="text-blue-500 flex items-center">
+                                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12H9m0 0l3-3m-3 3l3 3m6 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        View Details
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
+
+
+            {/* Pagination */}
+            <div className="flex justify-center mt-4">
+                <button
+                    onClick={() => setCurrentPage(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="px-3 py-1 border bg-gray-300 disabled:bg-gray-100"
+                >
+                    Previous
+                </button>
+                <span className="mx-3">{`Page ${currentPage} of ${totalPages}`}</span>
+                <button
+                    onClick={() => setCurrentPage(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="px-3 py-1 border bg-gray-300 disabled:bg-gray-100"
+                >
+                    Next
+                </button>
+            </div>
+
+            {/* Order Modal */}
+            {isModalOpen && selectedOrder && (
+                <OrderModal
+                    order={selectedOrder}
+                    onClose={handleCloseModal}
+                    refreshOrders={() => setCurrentPage(currentPage)} // Refresh after updates
+                />
+            )}
+        </div>
+    );
+}
+
+export default OrderTable;

@@ -50,7 +50,7 @@ const DashboardStats = () => {
       const token = localStorage.getItem("token");
 
       try {
-        const response = await fetch("/api/orders/my-orders", {
+        const response = await fetch("/api/orders/admin", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

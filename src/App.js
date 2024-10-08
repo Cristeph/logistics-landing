@@ -18,6 +18,7 @@ import Services from 'pages/Services';
 import Invoice from "pages/Invoice";
 import Admin from "pages/Admin";
 import NotFound from 'pages/NotFound';
+import OrderManagement from 'pages/OrderManagement';
 
 const App = () => {
 
@@ -50,13 +51,14 @@ const App = () => {
         <Route path="dashboard/" element={<DashboardLayout />}>
           <Route index element={<Overview />} />
           <Route path="overview" element={<Overview />} />
-          <Route path="admin" element={<Admin />} />
           <Route path="booking" element={<Booking />} />
           <Route path="notifications" element={<Notifications />} />
           <Route path="support" element={<Support />} />
           <Route path="payment" element={<Payment />} />
           <Route path="payment/invoice" element={<Invoice />} />
           <Route path="accountmanagement" element={<Account />} />
+          <Route path="admin" element={<Admin />} />
+          <Route path="ordermanagement" element={<OrderManagement />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

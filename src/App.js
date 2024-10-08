@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';  // Import AOS styles
 import HomePage from 'pages/HomePage';
 import TrackingPage from 'pages/TrackingPage';
 import AuthPage from 'pages/AuthPage';
@@ -15,8 +17,7 @@ import Notifications from 'pages/Notifications';
 import Services from 'pages/Services';
 import Invoice from "pages/Invoice";
 import Admin from "pages/Admin";
-import AOS from 'aos';
-import 'aos/dist/aos.css';  // Import AOS styles
+import NotFound from 'pages/NotFound';
 
 const App = () => {
 
@@ -57,6 +58,7 @@ const App = () => {
           <Route path="payment/invoice" element={<Invoice />} />
           <Route path="accountmanagement" element={<Account />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

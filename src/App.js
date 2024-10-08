@@ -19,6 +19,7 @@ import Invoice from "pages/Invoice";
 import Admin from "pages/Admin";
 import NotFound from 'pages/NotFound';
 import OrderManagement from 'pages/OrderManagement';
+import PaymentManagement from 'pages/PaymentManagement';
 
 const App = () => {
 
@@ -59,6 +60,7 @@ const App = () => {
           <Route path="accountmanagement" element={<Account />} />
           <Route path="admin" element={<Admin />} />
           <Route path="ordermanagement" element={<OrderManagement />} />
+          <Route path="paymentmanagement" element={<PaymentManagement />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

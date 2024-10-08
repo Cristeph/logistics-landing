@@ -8,16 +8,18 @@ import Testimonials from "components/Testimonials";
 import CallToAction from "components/CallToAction";
 import Footer from "components/Footer" ; 
 import ContactUs from "./ContactUs";
+import Aboutus from "components/Aboutus";
 
 const HomePage = () => {
   return (
     <div className="font-sans bg-gray-100">
       <Navbar />
       <HeroSection />
-      <ServicesSection />
-      <RequestQuote /> 
+      <Aboutus/>
       <FeaturesSection />
+      <ServicesSection />
       <Testimonials />
+       <RequestQuote /> 
       <CallToAction /> 
       <ContactUs/>
       <Footer />

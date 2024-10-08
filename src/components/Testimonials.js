@@ -4,25 +4,25 @@ const Testimonials = () => {
   const testimonials = [
     {
       quote:
-        "As YC's first Nigerian startup Paystack leads the charge of great companies coming out of Africa, powering modern payments for an entire continent.",
-      name: "John Doe",
-      title: "CEO, Stripe",
+        "I love that Cristeph provides real-time tracking updates for every shipment. It's great to have the peace of mind knowing exactly where my packages are at all times. The notifications are timely, and the customer service team is very responsive if I ever have questions.",
+      name: "Laura M",
+      title: "Small Business Owner",
       image:
         "https://cristeph.netlify.app/static/media/hero-section.babe9b414c56a2b7f51d.jpg",
     },
     {
       quote:
-        "Our investment in Paystack aligns with the kind of investments we look for - those that will help extend our reach into the global commerce ecosystem",
-      name: "Sarah Lee",
-      title: "CEO, Stripe",
+        "We use Cristeph for both express and bulk cargo shipments, and their speed and attention to detail have been outstanding. Whether it's same-day delivery or complex cargo logistics, they always deliver on time with secure handling of our goods.",
+      name: "Brian T.",
+      title: "Supply Chain Manager",
       image:
         "https://cristeph.netlify.app/static/media/hero-section.babe9b414c56a2b7f51d.jpg",
     },
     {
       quote:
-        "Our investment in Paystack aligns with the kind of investments we look for - those that will help extend our reach into the global commerce ecosystem",
-      title: "CEO, Stripe",
-      name: "Sarah Lee",
+        "Cristeph helped us expand our business by providing efficient ocean and air freight solutions. They made international shipping seamless, and their team handled all the paperwork and customs details for us. We trust them with all our major shipments.",
+      title: "Global Logistics Coordinator",
+      name: "Martha R",
       image:
         "https://cristeph.netlify.app/static/media/hero-section.babe9b414c56a2b7f51d.jpg",
     },

@@ -84,7 +84,12 @@ const Navbar = () => {
                         </a>
                     </li>
                     <li onClick={toggleMenu}>
-                        <a href="#services" className="">
+                        <a href="#about-us" className="">
+                            About Us
+                        </a>
+                    </li>
+                    <li onClick={toggleMenu}>
+                        <a href="#ourservices" className="">
                             Services
                         </a>
                     </li>
@@ -128,7 +133,12 @@ const Navbar = () => {
                         </a>
                     </li>
                     <li onClick={toggleMenu}>
-                        <a href="#services" className="">
+                        <a href="#about-us" className="">
+                            About us 
+                        </a>
+                    </li>
+                    <li onClick={toggleMenu}>
+                        <a href="/#ourservices" className="">
                             Services
                         </a>
                     </li>
@@ -137,6 +147,8 @@ const Navbar = () => {
                             Contact
                         </a>
                     </li>
+
+                    
                     <li onClick={toggleMenu}>
                         <a href="#faq" className="">
                             FAQ

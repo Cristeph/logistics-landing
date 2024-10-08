@@ -26,21 +26,19 @@ const AuthPage = () => {
           <div className="flex justify-between mb-6">
             <button
               onClick={() => setActiveTab("login")}
-              className={`text-lg font-bold px-4 py-2 ${
-                activeTab === "login"
+              className={`text-lg font-bold px-4 py-2 ${activeTab === "login"
                   ? "text-[#9d1111] border-b-4 border-[#9d1111]"
                   : "text-gray-500"
-              }`}
+                }`}
             >
               Login
             </button>
             <button
               onClick={() => setActiveTab("signup")}
-              className={`text-lg font-bold px-4 py-2 ${
-                activeTab === "signup"
+              className={`text-lg font-bold px-4 py-2 ${activeTab === "signup"
                   ? "text-[#9d1111] border-b-4 border-[#9d1111]"
                   : "text-gray-500"
-              }`}
+                }`}
             >
               Signup
             </button>
@@ -81,12 +79,17 @@ const LoginForm = () => {
       if (response.ok) {
         // Store token in localStorage or cookies
         localStorage.setItem("token", data.token);
-        console.log(data);
+        // Store some user data in localStorage
+        localStorage.setItem("user", JSON.stringify(data.user));
         // Redirect to dashboard
-        navigate("/dashboard");
+        if (data.user.role === "admin") {
+          navigate("/dashboard/admin");
+        } else {
+          navigate("/dashboard");
+        }
       } else {
         // Handle errors (display error message)
-        Swal.fire("Error", data.message || "Login failed!", "error");
+        Swal.fire("Error", data.error || "Login failed!", "error");
       }
     } catch (error) {
       console.error("Login Error:", error);
@@ -164,7 +167,7 @@ const SignupForm = ({ switchToLogin }) => {
         });
       } else {
         // Handle errors (display error message)
-        Swal.fire("Error", data.message || "Signup failed!", "error");
+        Swal.fire("Error", data.error || "Signup failed!", "error");
       }
     } catch (error) {
       console.error("Signup Error:", error);

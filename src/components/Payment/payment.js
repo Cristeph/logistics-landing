@@ -5,6 +5,8 @@ const PaymentBillingComponent = () => {
   const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [transactionId, setTransactionId] = useState("");
+
 
   useEffect(() => {
     const fetchPayments = async () => {
@@ -34,6 +36,40 @@ const PaymentBillingComponent = () => {
 
     fetchPayments();
   }, []);
+
+  const handlePayment = (orderId, amount) => {
+    const handler = window.PaystackPop.setup({
+      key: 'pk_test_95aeb37b0446963663690ae1c66ac7545b29d4be',
+      email: 'plutonium712@gmail.com',
+      amount: amount * 100,
+      currency: 'NGN',
+      metadata: {
+        custom_fields: [
+          {
+            display_name: "Invoice",
+            variable_name: "invoice_id",
+            value: orderId
+          },
+        ],
+      },
+      callback: function (response) {
+        // Handle successful payment here
+        console.log('Payment successful:', response);
+
+        // Set the transaction ID from the Paystack response
+        setTransactionId(response.reference);
+        console.log(transactionId);
+
+        // Create payment token after successful payment
+        // createPaymentToken(response.reference);
+      },
+      onClose: function () {
+        alert('Payment window closed.');
+      },
+    });
+    handler.openIframe();
+  };
+
 
   if (loading) {
     return <div>Loading payments...</div>;
@@ -75,6 +111,9 @@ const PaymentBillingComponent = () => {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Status
                   </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    #
+                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -91,6 +130,14 @@ const PaymentBillingComponent = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {payment.status}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      <button
+                        className="mt-4 px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-600"
+                        onClick={() => handlePayment(payment.order.trackingNumber, payment.amount)}
+                      >
+                        Pay Now
+                      </button>
                     </td>
                   </tr>
                 ))}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import OrderModal from './DetailedOrderModal'; // Import the modal component
+import PaymentModal from './PaymentModal';  // Import the modal
 
 function OrderTable() {
     const [orders, setOrders] = useState([]);
@@ -8,6 +9,8 @@ function OrderTable() {
     const [totalPages, setTotalPages] = useState(1);
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+    const [selectedOrderId, setSelectedOrderId] = useState(null);
 
     const token = localStorage.getItem('token');
     // Fetch orders based on the current page
@@ -41,12 +44,23 @@ function OrderTable() {
         setSelectedOrder(null);
     };
 
+    const handleOpenPaymentModal = (orderId) => {
+        setSelectedOrderId(orderId);
+        setIsPaymentModalOpen(true);
+    };
+
+    const handleClosePaymentModal = () => {
+        setIsPaymentModalOpen(false);
+        setSelectedOrderId(null);
+    };
+
     return (
         <div>
             <div className="overflow-x-auto">
                 <table className="min-w-full table-auto border-collapse bg-white shadow-md rounded-lg overflow-hidden">
                     <thead className="text-black">
                         <tr>
+                            <th className="px-4 py-2 text-xs md:text-sm lg:text-base">#</th>
                             <th className="px-4 py-2 text-xs md:text-sm lg:text-base">Tracking Number</th>
                             <th className="px-4 py-2 text-xs md:text-sm lg:text-base">Status</th>
                             <th className="px-4 py-2 text-xs md:text-sm lg:text-base">Pickup Address</th>
@@ -57,18 +71,28 @@ function OrderTable() {
                     </thead>
                     <tbody>
                         {orders.map((order) => (
-                            <tr key={order._id} onClick={() => handleOrderClick(order)} className="cursor-pointer hover:bg-gray-100">
+                            <tr key={order._id} className="cursor-pointer hover:bg-gray-100">
+                                <td className="border px-2 py-1 md:px-4 md:py-2">{new Date(order.createdAt).toLocaleDateString()}</td>
                                 <td className="border px-2 py-1 md:px-4 md:py-2">{order.trackingNumber}</td>
                                 <td className="border px-2 py-1 md:px-4 md:py-2">{order.status}</td>
                                 <td className="border px-2 py-1 md:px-4 md:py-2">{order.pickupAddress.city}, {order.pickupAddress.state}</td>
                                 <td className="border px-2 py-1 md:px-4 md:py-2">{order.dropoffAddress.city}, {order.dropoffAddress.state}</td>
                                 <td className="border px-2 py-1 md:px-4 md:py-2">{order.customer.name}</td>
                                 <td className="border px-2 py-1 md:px-4 md:py-2">
-                                    <button className="text-blue-500 flex items-center">
+                                    <button
+                                        className="text-blue-500 flex items-center"
+                                        onClick={() => handleOrderClick(order)}
+                                    >
                                         <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12H9m0 0l3-3m-3 3l3 3m6 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                         </svg>
                                         View Details
+                                    </button>
+                                    <button
+                                        className="bg-[#9d1111] text-white px-2 py-1 rounded-md"
+                                        onClick={() => handleOpenPaymentModal(order.trackingNumber)}
+                                    >
+                                        Set Payment
                                     </button>
                                 </td>
                             </tr>
@@ -106,6 +130,14 @@ function OrderTable() {
                     refreshOrders={() => setCurrentPage(currentPage)} // Refresh after updates
                 />
             )}
+
+            {/* Payment Modal */}
+            <PaymentModal
+                isOpen={isPaymentModalOpen}
+                onClose={handleClosePaymentModal}
+                orderId={selectedOrderId}
+            />
+
         </div>
     );
 }

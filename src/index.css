@@ -728,6 +728,16 @@ p{
                     .openNavg{
                                         transform: translate(0);
                     }
+                    .Header{
+                                        font-size: 2.4rem;
+                                        line-height: 2.4rem;
+
+                    }
+
+                    .Heroheader{
+                                        font-size: 3.0rem;
+                                        line-height: 3.0rem;
+                    }
 
                     .phoneNav .innerTopNav li{
                                         margin-bottom: 40px;

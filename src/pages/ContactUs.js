@@ -54,14 +54,18 @@ const ContactUs = () => {
               <div className="thaIcons">
                 <Io5Icons.IoMailOutline />
               </div>
-              <div>support@logisticslight.com</div>
+              <div>cristephinternationallogistics@gmail.com</div>
             </div>
 
             <div className="contactInfo">
               <div className="thaIcons">
                 <GoIcons.GoLocation />
               </div>
-              <div>support@logisticslight.com</div>
+              <div>
+               <div>China</div>
+              <div>Nigeria</div>               
+              </div>
+
             </div>
           </div>
         </div>

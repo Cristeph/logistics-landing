@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { numberWithCommas } from 'utils/helpers';
+import waitingIllustration from 'assets/images/no-data-available.svg';
 
 const PaymentBillingComponent = () => {
   const [payments, setPayments] = useState([]);
@@ -105,9 +106,12 @@ const PaymentBillingComponent = () => {
       <div className="bg-white rounded-lg shadow-md my-10">
         <div className="overflow-x-auto">
           {payments.length === 0 ? (
-            <div className="text-center p-4">
-              <p className="text-gray-500">No payments available.</p>
-            </div>
+            <>
+              <p className="text-center text-gray-600 p-4 text-lg">Your payments will appear here</p>
+              <div className="flex">
+                <img className="self-center mx-auto" src={waitingIllustration} alt="illustration" />
+              </div>
+            </>
           ) : (
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">

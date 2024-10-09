@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { numberWithCommas } from 'utils/helpers';
 import PaymentDetailsModal from './PaymentDetailsModal';  // Modal component
 
 const PaymentTable = () => {
@@ -61,13 +62,23 @@ const PaymentTable = () => {
                         <tr key={payment._id} className="text-center">
                             <td className="py-2 px-4">{new Date(payment.createdAt).toLocaleDateString()}</td>
                             <td className="py-2 px-4">{payment._id}</td>
-                            <td className="py-2 px-4">₦{(payment.amount / 100).toFixed(2)}</td>
+                            <td className="py-2 px-4">₦{numberWithCommas((payment.amount).toFixed(2))}</td>
                             <td className="py-2 px-4">{payment.method}</td>
-                            <td className="py-2 px-4">{payment.status}</td>
+                            <td className="py-2 px-4">
+                                {
+                                    (payment.status === 'pending') ? (
+                                        <span className="bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs">Pending</span>
+                                    ) : (payment.status === 'completed') ? (
+                                        <span className="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Completed</span>
+                                    ) : (
+                                        <span className="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">Failed</span>
+                                    )
+                                }
+                            </td>
                             <td className="py-2 px-4">
                                 <button
                                     onClick={() => handlePaymentClick(payment)}
-                                    className="bg-[#9d1111] text-white px-4 py-2 rounded-md"
+                                    className="bg-blue-500 text-white px-4 py-2 rounded-md"
                                 >
                                     View Details
                                 </button>

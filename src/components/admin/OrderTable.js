@@ -83,13 +83,10 @@ function OrderTable() {
                                         className="text-blue-500 flex items-center"
                                         onClick={() => handleOrderClick(order)}
                                     >
-                                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12H9m0 0l3-3m-3 3l3 3m6 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
                                         View Details
                                     </button>
                                     <button
-                                        className="bg-[#9d1111] text-white px-2 py-1 rounded-md"
+                                        className="bg-blue-600 text-white px-2 py-1 rounded-md"
                                         onClick={() => handleOpenPaymentModal(order.trackingNumber)}
                                     >
                                         Set Payment

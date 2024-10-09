@@ -1,4 +1,5 @@
 import React from 'react';
+import { numberWithCommas } from 'utils/helpers';
 
 const PaymentDetailsModal = ({ payment, onClose }) => {
     if (!payment) return null;
@@ -13,9 +14,19 @@ const PaymentDetailsModal = ({ payment, onClose }) => {
                 <div className="mb-4">
                     <h3 className="font-bold">Payment Info:</h3>
                     <p><strong>Payment ID:</strong> {payment._id}</p>
-                    <p><strong>Amount:</strong> ${(payment.amount / 100).toFixed(2)}</p>
+                    <p><strong>Amount:</strong> ₦{numberWithCommas((payment.amount / 100).toFixed(2))}</p>
                     <p><strong>Method:</strong> {payment.method}</p>
-                    <p><strong>Status:</strong> {payment.status}</p>
+                    <p><strong>Status:</strong>
+                        {
+                            (payment.status === 'pending') ? (
+                                <span className="bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs">Pending</span>
+                            ) : (payment.status === 'completed') ? (
+                                <span className="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Completed</span>
+                            ) : (
+                                <span className="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">Failed</span>
+                            )
+                        }
+                    </p>
                 </div>
 
                 <div className="mb-4">

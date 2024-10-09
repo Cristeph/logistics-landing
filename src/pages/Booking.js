@@ -137,13 +137,13 @@ const Booking = () => {
                 <div className="flex justify-center mb-6">
                     <button
                         onClick={() => setActiveTab('create')}
-                        className={`text-lg font-bold px-4 py-2 ${activeTab === 'create' ? 'text-[#9d1111] border-b-4 border-[#9d1111]' : 'text-gray-500'}`}
+                        className={`text-lg font-bold px-4 py-2 ${activeTab === 'create' ? 'text-blue-500 border-b-4 border-blue-500' : 'text-gray-500'}`}
                     >
                         Create Order
                     </button>
                     <button
                         onClick={() => setActiveTab('orders')}
-                        className={`text-lg font-bold px-4 py-2 ${activeTab === 'orders' ? 'text-[#9d1111] border-b-4 border-[#9d1111]' : 'text-gray-500'}`}
+                        className={`text-lg font-bold px-4 py-2 ${activeTab === 'orders' ? 'text-blue-500 border-b-4 border-blue-500' : 'text-gray-500'}`}
                     >
                         My Orders
                     </button>
@@ -183,7 +183,7 @@ const Booking = () => {
                         </div>
                         <input type="text" name="description" value={formData.description} onChange={handleInputChange} placeholder="Package Description" className="border p-2 rounded w-full mb-4" />
 
-                        <button className="bg-[#9d1111] text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300">Create Order</button>
+                        <button className="flex justify-center bg-teal-600 text-white py-2 px-4 rounded hover:bg-teal-700 transition duration-300">Create Order</button>
                     </form>
                 ) : (
                     <div>

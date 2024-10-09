@@ -2,62 +2,72 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Navbar from "components/Navbar";
-import Footer from "components/Footer";
+import * as VscIcon from "react-icons/vsc";
 import authBg from "assets/images/auth-bg.jpg";
 
 const AuthPage = () => {
+
+  const [showPassword, setShowPassword] = useState(false)
+
+  const togglePasswordVisibility = () =>{
+    setShowPassword(!showPassword)
+  }
   const [activeTab, setActiveTab] = useState("login");
 
   const switchToLogin = () => {
-    setActiveTab("login");
+    setActiveTab("login"); 
   };
 
   return (
     <>
       <Navbar />
       <div
-        className="min-h-[700px] bg-gray-100 flex justify-center items-center"
+        className="min-h-[700px] bg-gray-100 flex justify-center items-center fullbodyAuth"
         style={{
           backgroundImage: `url(${authBg})`,
         }}
       >
-        <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+        <div className="  rounded-lg p-8 max-w-md w-full formThing">
           {/* Tabs for switching between Login and Signup */}
-          <div className="flex justify-between mb-6">
-            <button
-              onClick={() => setActiveTab("login")}
-              className={`text-lg font-bold px-4 py-2 ${activeTab === "login"
-                  ? "text-[#9d1111] border-b-4 border-[#9d1111]"
-                  : "text-gray-500"
+          <div className="flex justify-between tabContAuth">
+            <div        className={`tabContAuthafter ${
+                  activeTab === "login" ? "tableft" : "tabright"
+                }`}></div>
+
+            <div  className="flex justify-between innerTabs">
+              <button
+                onClick={() => setActiveTab("login")}
+                className={`tabBtn ${
+                  activeTab === "login" ? "tabActive" : "tabstine"
                 }`}
-            >
-              Login
-            </button>
-            <button
-              onClick={() => setActiveTab("signup")}
-              className={`text-lg font-bold px-4 py-2 ${activeTab === "signup"
-                  ? "text-[#9d1111] border-b-4 border-[#9d1111]"
-                  : "text-gray-500"
+              >
+                Login
+              </button>
+              <button
+                onClick={() => setActiveTab("signup")}
+                className={`tabBtn ${
+                  activeTab === "signup" ? "tabActive" : "tabstine"
                 }`}
-            >
-              Signup
-            </button>
+              >
+                Signup
+              </button>
+            </div>
           </div>
 
           {/* Conditional Form Display */}
           {activeTab === "login" ? (
-            <LoginForm />
+            <LoginForm  togglePasswordVisibility={togglePasswordVisibility} showPassword={showPassword} setShowPassword={setShowPassword} />
           ) : (
-            <SignupForm switchToLogin={switchToLogin} />
+            <SignupForm togglePasswordVisibility={togglePasswordVisibility} showPassword={showPassword} setShowPassword={setShowPassword} switchToLogin={switchToLogin} />
           )}
         </div>
       </div>
-      <Footer />
     </>
   );
 };
 
-const LoginForm = () => {
+ 
+const LoginForm = ({showPassword, setShowPassword, togglePasswordVisibility  }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -100,36 +110,41 @@ const LoginForm = () => {
   return (
     <form onSubmit={handleLogin}>
       <div className="mb-4">
-        <label className="block text-gray-700">Email</label>
+        <label className="block chrisInputLabel">Email</label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#9d1111]"
+          className="w-full px-3 py-2 border rounded-md chrisInput"
         />
       </div>
-      <div className="mb-4">
-        <label className="block text-gray-700">Password</label>
+      <div className="mb-4 passInput">
+        <label className="block chrisInputLabel">Password</label>
         <input
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#9d1111]"
+          className="w-full px-3 py-2 border rounded-md chrisInput"
         />
+
+<div className="passsIcon" onClick={togglePasswordVisibility} >
+   {showPassword ? <VscIcon.VscEyeClosed /> :   <VscIcon.VscEye />}   
+
+        </div>
       </div>
       <div className="flex justify-between items-center mb-6">
-        <a href="/#" className="text-sm text-[#9d1111] hover:underline">
+        <a href="/#" className="text-sm forgot hover:underline">
           Forgot Password?
         </a>
       </div>
-      <button className="w-full bg-[#9d1111] text-white py-2 rounded-md hover:bg-red-700 transition duration-300">
+      <button className="w-full bg-[#9d1111] text-white py-2 rounded-md hover:bg-red-700 transition duration-300 subBtn">
         Login
       </button>
     </form>
   );
 };
 
-const SignupForm = ({ switchToLogin }) => {
+const SignupForm = ({ switchToLogin, showPassword, setShowPassword, togglePasswordVisibility }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -175,45 +190,53 @@ const SignupForm = ({ switchToLogin }) => {
     }
   };
 
+
   return (
     <form onSubmit={handleSignup}>
       <div className="mb-4">
-        <label className="block text-gray-700">Full Name</label>
+        <label className="block chrisInputLabel">Full Name</label>
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#9d1111]"
+          className="w-full px-3 py-2 border rounded-md chrisInput"
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700">Email</label>
+        <label className="block chrisInputLabel">Email</label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#9d1111]"
+          className="w-full px-3 py-2 border rounded-md chrisInput"
         />
       </div>
-      <div className="mb-4">
-        <label className="block text-gray-700">Password</label>
+      <div className="mb-4 passInput">
+        <label className="block chrisInputLabel">Password</label>
+
+        <div  className="passsIcon" onClick={togglePasswordVisibility} >
+   {showPassword ? <VscIcon.VscEyeClosed /> :   <VscIcon.VscEye />}   
+
+        </div>
+     
+      
         <input
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#9d1111]"
+          className="w-full px-3 py-2 border rounded-md chrisInput"
         />
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700">Confirm Password</label>
+        <label className="block chrisInputLabel">Confirm Password</label>
         <input
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#9d1111]"
+          className="w-full px-3 py-2 border rounded-md chrisInput"
         />
       </div>
-      <button className="w-full bg-[#9d1111] text-white py-2 rounded-md hover:bg-red-700 transition duration-300">
+      <button className="w-full bg-[#9d1111] text-white py-2 rounded-md hover:bg-red-700 transition duration-300 subBtn">
         Signup
       </button>
     </form>

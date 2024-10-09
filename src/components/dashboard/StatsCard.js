@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaBox, FaMoneyBillWave, FaChartLine } from "react-icons/fa";
+import { FaBox, FaChartLine, FaBell } from "react-icons/fa";
 
 const DashboardStats = () => {
   const [stats, setStats] = useState({
@@ -7,6 +7,7 @@ const DashboardStats = () => {
     totalMoney: 0,
     totalPayments: 0,
     recentPaymentDate: "",
+    totalUnreadNotifications: 0,
     loading: true,
     error: null,
   });
@@ -78,8 +79,37 @@ const DashboardStats = () => {
       }
     };
 
+    const fetchNotifications = async () => {
+      const token = localStorage.getItem("token");
+
+      try {
+        const response = await fetch("/api/notifications", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch notifications");
+        }
+
+        const notifications = await response.json();
+        const unreadNotifications = notifications.filter(notification => !notification.read).length;
+
+        setStats(prev => ({
+          ...prev,
+          totalUnreadNotifications: unreadNotifications,
+        }));
+      } catch (error) {
+        setStats(prev => ({ ...prev, error: error.message }));
+      }
+    };
+
     fetchPaymentsSummary();
     fetchOrders();
+    fetchNotifications();
   }, []);
 
   if (stats.loading) {
@@ -100,18 +130,18 @@ const DashboardStats = () => {
         trendType="up"
       />
       <Card
-        title="Total Money Received"
-        value={`₦${stats.totalMoney.toLocaleString()}`} // Format the total money
-        icon={<FaMoneyBillWave className="text-blue-500" />}
-        trend="1.3% Up from past week" // Example trend
-        trendType="up"
-      />
-      <Card
         title="Total Payments"
         value={stats.totalPayments}
         icon={<FaChartLine className="text-green-500" />}
         trend="4.3% Down from yesterday" // Example trend
         trendType="down"
+      />
+      <Card
+        title="Unread Notifications"
+        value={stats.totalUnreadNotifications}
+        icon={<FaBell className="text-red-500" />}
+        trend="New notifications" // Example trend
+        trendType="up"
       />
     </div>
   );

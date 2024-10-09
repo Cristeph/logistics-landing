@@ -3,6 +3,7 @@ import { FaTruck } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
 import { IoMdCheckmark } from "react-icons/io";
 import Swal from "sweetalert2";
+import waitingIllustration from 'assets/images/no-data-available.svg';
 
 const Notify = () => {
   const [notifications, setNotifications] = useState([]);
@@ -112,44 +113,53 @@ const Notify = () => {
         </button>
       </div>
       <div className="bg-white rounded-lg">
-        <ul>
-          {notifications.map((notification) => (
-            <li key={notification._id} className="border-b last:border-b-0 p-4">
-              <div className="flex items-start space-x-4">
-                <FaTruck className="text-3xl text-teal-500" />
-                <div className="flex-1">
-                  <p className="capitalize">
-                    {notification.message}{" "}
-                    <span className="text-teal-600">
-                      {notification.project}
-                    </span>
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    {new Date(notification.createdAt).toLocaleString()} •{" "}
-                    {notification.team}
-                  </p>
-                  {notification.comment && (
-                    <p className="text-sm mt-1">{notification.comment}</p>
-                  )}
-                </div>
-                <div className="flex items-center space-x-2">
-                  {!notification.read && (
-                    <IoMdCheckmark
-                      className="text-teal-500 w-5 h-5 cursor-pointer"
-                      onClick={() => markAsRead(notification._id)}
+        {notifications.length === 0 ? (
+          <>
+            <p className="text-center text-gray-600 p-4 text-lg">You have no notifications</p>
+            <div className="flex">
+              <img className="self-center mx-auto" src={waitingIllustration} alt="illustration" />
+            </div>
+          </>
+        ) : (
+          <ul>
+            {notifications.map((notification) => (
+              <li key={notification._id} className="border-b last:border-b-0 p-4">
+                <div className="flex items-start space-x-4">
+                  <FaTruck className="text-3xl text-teal-500" />
+                  <div className="flex-1">
+                    <p className="capitalize">
+                      {notification.message}{" "}
+                      <span className="text-teal-600">
+                        {notification.project}
+                      </span>
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      {new Date(notification.createdAt).toLocaleString()} •{" "}
+                      {notification.team}
+                    </p>
+                    {notification.comment && (
+                      <p className="text-sm mt-1">{notification.comment}</p>
+                    )}
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    {!notification.read && (
+                      <IoMdCheckmark
+                        className="text-teal-500 w-5 h-5 cursor-pointer"
+                        onClick={() => markAsRead(notification._id)}
+                      />
+                    )}
+                    <AiFillDelete
+                      className="text-red-500 w-5 h-5 cursor-pointer"
+                      onClick={() => handleDelete(notification._id)}
                     />
-                  )}
-
-                  <AiFillDelete
-                    className="text-red-500 w-5 h-5 cursor-pointer"
-                    onClick={() => handleDelete(notification._id)}
-                  />
+                  </div>
                 </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
+
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
+import waitingIllustration from 'assets/images/no-data-available.svg';
 
 const Booking = () => {
     const [activeTab, setActiveTab] = useState('create');
@@ -46,7 +47,7 @@ const Booking = () => {
         // Fetch orders on component mount
         fetchOrders();
         // eslint-disable-next-line
-    },[activeTab]);
+    }, [activeTab]);
 
     const handleCreateOrder = async (e) => {
         e.preventDefault();
@@ -115,12 +116,15 @@ const Booking = () => {
                 // Fetch updated list of orders
                 fetchOrders();
             } else {
-                Swal.fire('Error', data.message || 'Failed to create order.', 'error');
+                const errorMessage = data.error || 'Failed to create order.';
+                Swal.fire('Error', errorMessage, 'error');
             }
         } catch (error) {
-            Swal.fire('Error', 'Something went wrong. Please try again.', 'error');
+            const errorMessage = error.response?.data?.errors?.join(', ') || 'Something went wrong. Please try again.';
+            Swal.fire('Error', errorMessage, 'error');
         }
     };
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -189,7 +193,12 @@ const Booking = () => {
                     <div>
                         <h2 className="text-2xl font-bold mb-4">My Orders</h2>
                         {orders.length === 0 ? (
-                            <p>No orders found.</p>
+                            <>
+                                <p className="text-center text-gray-600 p-4 text-lg">Your orders will appear here</p>
+                                <div className="flex">
+                                    <img className="self-center mx-auto" src={waitingIllustration} alt="illustration" />
+                                </div>
+                            </>
                         ) : (
                             <div className="space-y-4">
                                 {orders.map((order) => (

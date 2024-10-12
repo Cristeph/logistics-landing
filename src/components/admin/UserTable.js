@@ -22,7 +22,8 @@ const UserTable = () => {
 
     useEffect(() => {
         fetchUsers();
-    },);
+        // eslint-disable-next-line
+    },[]);
 
     return (
         <div className="p-6 bg-gray-100 rounded-lg shadow-lg">

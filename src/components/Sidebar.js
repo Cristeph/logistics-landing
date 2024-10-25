@@ -86,14 +86,6 @@ const Sidebar = ({ isSidebarOpen }) => {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="usersmanagement" className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
-                                            <svg className="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M10 12a5 5 0 100-10 5 5 0 000 10zm-7 8a7 7 0 0114 0H3z"></path>
-                                            </svg>
-                                            <span className="ml-3 flex-1 whitespace-nowrap">Users Management</span>
-                                        </Link>
-                                    </li>
-                                    <li>
                                         <Link to="ordermanagement" className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
                                             <svg className="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M3 3h14a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V4a1 1 0 011-1zm0 2v10h14V5H3zm2 2h10v2H5V7zm0 4h10v2H5v-2z"></path>
@@ -123,6 +115,14 @@ const Sidebar = ({ isSidebarOpen }) => {
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
                                             </svg>
                                             <span className="ml-3 flex-1 whitespace-nowrap">Notifications</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="usersmanagement" className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group">
+                                            <svg className="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10 12a5 5 0 100-10 5 5 0 000 10zm-7 8a7 7 0 0114 0H3z"></path>
+                                            </svg>
+                                            <span className="ml-3 flex-1 whitespace-nowrap">Users Management</span>
                                         </Link>
                                     </li>
                                 </>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { numberWithCommas } from 'utils/helpers';
 
 const PaymentSummaryCard = () => {
   const [summary, setSummary] = useState({
@@ -56,7 +57,7 @@ const PaymentSummaryCard = () => {
         </div>
         <div>
           <p className="text-sm text-gray-600">Total Amount</p>
-          <p className="text-xl font-semibold">₦{summary.totalAmount}</p>
+          <p className="text-xl font-semibold">₦{numberWithCommas(summary.totalAmount)}</p>
         </div>
       </div>
       <div>

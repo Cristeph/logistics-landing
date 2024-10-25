@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
+import waitingIllustration from 'assets/images/no-data-available.svg';
 
 const Booking = () => {
     const [activeTab, setActiveTab] = useState('create');
@@ -46,7 +47,7 @@ const Booking = () => {
         // Fetch orders on component mount
         fetchOrders();
         // eslint-disable-next-line
-    },[activeTab]);
+    }, [activeTab]);
 
     const handleCreateOrder = async (e) => {
         e.preventDefault();
@@ -115,12 +116,15 @@ const Booking = () => {
                 // Fetch updated list of orders
                 fetchOrders();
             } else {
-                Swal.fire('Error', data.message || 'Failed to create order.', 'error');
+                const errorMessage = data.error || 'Failed to create order.';
+                Swal.fire('Error', errorMessage, 'error');
             }
         } catch (error) {
-            Swal.fire('Error', 'Something went wrong. Please try again.', 'error');
+            const errorMessage = error.response?.data?.errors?.join(', ') || 'Something went wrong. Please try again.';
+            Swal.fire('Error', errorMessage, 'error');
         }
     };
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -137,13 +141,13 @@ const Booking = () => {
                 <div className="flex justify-center mb-6">
                     <button
                         onClick={() => setActiveTab('create')}
-                        className={`text-lg font-bold px-4 py-2 ${activeTab === 'create' ? 'text-[#9d1111] border-b-4 border-[#9d1111]' : 'text-gray-500'}`}
+                        className={`text-lg font-bold px-4 py-2 ${activeTab === 'create' ? 'text-blue-500 border-b-4 border-blue-500' : 'text-gray-500'}`}
                     >
                         Create Order
                     </button>
                     <button
                         onClick={() => setActiveTab('orders')}
-                        className={`text-lg font-bold px-4 py-2 ${activeTab === 'orders' ? 'text-[#9d1111] border-b-4 border-[#9d1111]' : 'text-gray-500'}`}
+                        className={`text-lg font-bold px-4 py-2 ${activeTab === 'orders' ? 'text-blue-500 border-b-4 border-blue-500' : 'text-gray-500'}`}
                     >
                         My Orders
                     </button>
@@ -183,13 +187,18 @@ const Booking = () => {
                         </div>
                         <input type="text" name="description" value={formData.description} onChange={handleInputChange} placeholder="Package Description" className="border p-2 rounded w-full mb-4" />
 
-                        <button className="bg-[#9d1111] text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300">Create Order</button>
+                        <button className="flex justify-center bg-teal-600 text-white py-2 px-4 rounded hover:bg-teal-700 transition duration-300">Create Order</button>
                     </form>
                 ) : (
                     <div>
                         <h2 className="text-2xl font-bold mb-4">My Orders</h2>
                         {orders.length === 0 ? (
-                            <p>No orders found.</p>
+                            <>
+                                <p className="text-center text-gray-600 p-4 text-lg">Your orders will appear here</p>
+                                <div className="flex">
+                                    <img className="self-center mx-auto" src={waitingIllustration} alt="illustration" />
+                                </div>
+                            </>
                         ) : (
                             <div className="space-y-4">
                                 {orders.map((order) => (

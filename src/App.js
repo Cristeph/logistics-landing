@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import AOS from 'aos';
-import 'aos/dist/aos.css';  // Import AOS styles
+
 import HomePage from 'pages/HomePage';
 import TrackingPage from 'pages/TrackingPage';
 import AuthPage from 'pages/AuthPage';
@@ -20,16 +19,17 @@ import Admin from "pages/Admin";
 import NotFound from 'pages/NotFound';
 import OrderManagement from 'pages/OrderManagement';
 import PaymentManagement from 'pages/PaymentManagement';
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 const App = () => {
 
   useEffect(() => {
     AOS.init({
-      duration: 1000,  // Set the duration for animations globally
-      offset: 200,     // Set the offset globally
+      duration: 3000, // You can control the duration of animations here
+      easing: 'ease-in-out', // Customize easing if needed
+      once: false, // Set this to true if you want the animations to happen only once
     });
-  }, []);  // Only initialize AOS once when the app loads
-
+  }, []);
   // DO NOT TOUCH 
   useEffect(() => {
     // IT JUST WAKES UP THE HIBERNATING/SLEEP 

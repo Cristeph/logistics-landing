@@ -72,7 +72,7 @@ const Aboutus = ({ counters }) => {
 
           <p data-aos="fade-up">
             Seamless global logistics, connecting key international market like
-            China andf Nigeria. with trusted partnerships and expertise in
+            China and Nigeria. with trusted partnerships and expertise in
             ocean, air and road freight. we provide reliable, cost effecttive
             solutions for both large and small shipments, ensuring smooth
             delivery and customers clearance worldwide.

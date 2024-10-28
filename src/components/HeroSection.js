@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import heroBg from "assets/images/hero-section.jpg";
+import bgvid from "assets/images/bgvid.MP4"
 import { ReactTyped } from "react-typed";
 
 const HeroSection = () => {
@@ -19,11 +20,10 @@ const HeroSection = () => {
   return (
     <div
       className="herosection"
-      style={{
-        backgroundImage: `url(${heroBg})`,
-      }}
+ 
     >
-      <div className="container mx-auto px-4 ">
+
+      <div className="container mx-auto px-4  thatTopX" >
 
         <div style={{maxWidth: '550px'}}>
         <h1 className="Heroheader">
@@ -68,6 +68,17 @@ const HeroSection = () => {
 
  
       </div>
+
+      <video autoPlay loop muted playsInline className="background-video">
+
+        <source src={bgvid} type="video/mp4" />
+       
+        Your browser does not support the video tag.
+      </video>
+
+      <div className="backgroundvideobefore">
+
+</div>
     </div>
   );
 };

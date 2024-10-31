@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import heroBg from "assets/images/hero-section.jpg";
+import { useNavigate } from "react-router-dom"; 
 import bgvid from "assets/images/bgvid.MP4"
 import { ReactTyped } from "react-typed";
 

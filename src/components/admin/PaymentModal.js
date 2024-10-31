@@ -46,7 +46,7 @@ const PaymentModal = ({ isOpen, onClose, orderId }) => {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white rounded-lg shadow-md p-6 w-1/3">
+            <div className="bg-white rounded-lg shadow-md p-6 md:w-1/3">
                 <h2 className="text-xl font-bold mb-4">Set Payment Information</h2>
 
                 <label className="block mb-2">Amount:</label>
@@ -70,7 +70,7 @@ const PaymentModal = ({ isOpen, onClose, orderId }) => {
                 </select>
 
                 <button
-                    className="bg-[#9d1111] text-white px-4 py-2 rounded-md w-full"
+                    className="bg-teal-600 text-white px-4 py-2 rounded-md w-full"
                     onClick={handlePaymentSubmit}
                 >
                     Submit Payment

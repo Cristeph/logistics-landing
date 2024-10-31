@@ -145,7 +145,7 @@ function DetailedOrderModal({ order, onClose, refreshOrders }) {
                     <div className="flex justify-center mt-2">
                         <button
                             onClick={updateStatus}
-                            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                            className="px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-600"
                         >
                             Update Status
                         </button>
@@ -157,7 +157,7 @@ function DetailedOrderModal({ order, onClose, refreshOrders }) {
                     <label className="block text-sm font-medium text-gray-700">Event</label>
                     <input
                         type="text"
-                        placeholder="Event description"
+                        placeholder="Enter event description"
                         value={event}
                         onChange={(e) => setEvent(e.target.value)}
                         className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
@@ -173,7 +173,7 @@ function DetailedOrderModal({ order, onClose, refreshOrders }) {
                     <div className="flex justify-center mt-2">
                         <button
                             onClick={geocodeLocation}
-                            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                            className="px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-600"
                         >
                             Add History
                         </button>

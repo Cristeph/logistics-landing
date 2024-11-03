@@ -71,7 +71,7 @@ const ContactUs = () => {
         </div>
 
         <div className="contact-form-container">
-          <form data-aos="fade-left    " className="contact-form">
+          <form data-aos="fade-up    " className="contact-form">
             <div className="contactformimg"></div>
           </form>
         </div>

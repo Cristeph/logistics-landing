@@ -69,7 +69,7 @@ const CourierManagement = () => {
                             <td className="py-3 px-4 border-b border-gray-300">{courier.phoneNumber}</td>
                             <td className="py-3 px-4 border-b border-gray-300">{courier.email}</td>
                             <td className="py-3 px-4 border-b border-gray-300">{courier.vehicle.type}</td>
-                            <td className="py-3 px-4 border-b border-gray-300">{`Lat: ${courier.location.latitude}, Lng: ${courier.location.longitude}`}</td>
+                            {/* <td className="py-3 px-4 border-b border-gray-300">{`Lat: ${courier.location.latitude}, Lng: ${courier.location.longitude}`}</td> */}
                             <td className="py-3 px-4 border-b border-gray-300">
                                 <button
                                     onClick={() => openModal(courier, 'assign')}
@@ -77,12 +77,12 @@ const CourierManagement = () => {
                                 >
                                     Assign Orders
                                 </button>
-                                <button
+                                {/* <button
                                     onClick={() => openModal(courier, 'location')}
                                     className="ml-2 px-2 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
                                 >
                                     Update Location
-                                </button>
+                                </button> */}
                                 <button
                                     onClick={() => openModal(courier, 'status')}
                                     className="ml-2 px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"

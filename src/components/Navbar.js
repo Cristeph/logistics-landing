@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logoTransparent from  "assets/images/logo-transparent.webp";
+import logoWhite from "assets/images/logo-white.webp";
 import { FaArrowRight } from "react-icons/fa6"; 
 
 const Navbar = () => {
@@ -41,7 +42,18 @@ const Navbar = () => {
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
                 {/* Logo */}
                 <a href="/#" className="text-2xl font-bold text-[#0c0e37]">
-                    <img alt="Cristeph Logo" fetchpriority="high" loading="lazy" width="231" height="71" decoding="async" data-nimg="1" className="h-10 w-auto" style={{ "color": "transparent" }} srcSet={logoTransparent} />
+                <img 
+            alt="Cristeph Logo" 
+            fetchpriority="high" 
+            loading="lazy" 
+            width="231" 
+            height="71" 
+            decoding="async" 
+            data-nimg="1" 
+            className="h-10 w-auto" 
+            style={{ color: 'transparent' }} 
+            srcSet={scrolled ?  logoTransparent : logoWhite} 
+        />
                 </a>
                 {/* Hamburger Icon */}
                 <div className="md:hidden">

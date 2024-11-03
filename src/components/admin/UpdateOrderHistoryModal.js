@@ -40,8 +40,22 @@ const UpdateOrderHistoryModal = ({ courier, onClose }) => {
         setSuggestions([]); // Clear suggestions after selection
     };
 
-    // Function to update order history
+    // Function to update order history with input validation
     const updateHistory = async () => {
+        if (!location || !latitude || !longitude || !event) {
+            MySwal.fire({
+                title: 'Error',
+                text: 'All fields must be filled out.',
+                icon: 'error',
+                toast: true,
+                position: 'top-end',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+            });
+            return;
+        }
+
         const historyUpdate = { location, latitude, longitude, event };
         try {
             await axios.put(`/api/couriers/${courier._id}/orders/history`, historyUpdate, {

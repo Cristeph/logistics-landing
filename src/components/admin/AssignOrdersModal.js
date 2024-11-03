@@ -9,12 +9,14 @@ const AssignOrdersModal = ({ courier, onClose }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [orderResults, setOrderResults] = useState([]);
     const [selectedOrders, setSelectedOrders] = useState([]);
+    const [error, setError] = useState(null);
     const token = localStorage.getItem('token');
 
     // Fetch orders by tracking ID
     const searchOrders = async (trackingID) => {
         if (!trackingID) {
             setOrderResults([]);
+            setError(null);
             return;
         }
         try {
@@ -23,10 +25,17 @@ const AssignOrdersModal = ({ courier, onClose }) => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            setOrderResults([response.data]); // Assuming response contains a single order object
+            if (response.data) {
+                setOrderResults([response.data]);
+                setError(null); // Clear any previous errors
+            } else {
+                setOrderResults([]);
+                setError('No order found with this tracking ID.');
+            }
         } catch (error) {
             console.error('Error fetching order by tracking ID:', error);
             setOrderResults([]);
+            setError('An error occurred while fetching the order. Please try again.');
         }
     };
 
@@ -77,6 +86,7 @@ const AssignOrdersModal = ({ courier, onClose }) => {
                             placeholder="Enter tracking ID"
                             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
                         />
+                        {error && <p className="text-red-500">{error}</p>}
                         {orderResults.length > 0 && (
                             <ul className="suggestions-list">
                                 {orderResults.map((order) => (

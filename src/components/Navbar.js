@@ -111,7 +111,7 @@ const Navbar = () => {
                         </a>
                     </li>
                     <li onClick={toggleMenu}>
-                        <a href="#faq" className="">
+                        <a href="/faq" className="">
                             FAQ
                         </a>
                     </li>

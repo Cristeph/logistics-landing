@@ -55,9 +55,9 @@ const FAQPage = () => {
     return (
         <>
             <Navbar />
-            <div className="min-h-screen bg-gray-100 py-10">
-                <div className="max-w-6xl mx-auto px-6">
-                    <h1 className="text-4xl font-bold text-[#0c0e37] text-center mb-8">Frequently Asked Questions</h1>
+            <div className="min-h-screen bg-gray-100 py-10 thatPad">
+                <div className="max-w-6xl mx-auto px-6 ">
+                    <h1 className="text-4xl font-bold text-[#fff] text-center mb-8">Frequently Asked Questions</h1>
                     <div className="bg-white shadow-md rounded-md p-6">
                         {faqData.map((item, index) => (
                             <div key={index} className="mb-4">

@@ -65,7 +65,7 @@ const TrackingPage = () => {
         return (
             <>
                 <Navbar />
-                <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
+                <div className="thatPad min-h-screen flex flex-col justify-center items-center bg-gray-100">
                     <h1 className="text-2xl font-bold text-gray-700">Loading Tracking Information...</h1>
                 </div>
             </>
@@ -76,9 +76,9 @@ const TrackingPage = () => {
         return (
             <>
                 <Navbar />
-                <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
+                <div className="thatPad min-h-screen flex flex-col justify-center items-center bg-gray-100">
                     <h1 className="text-2xl font-bold text-red-600">Tracking ID Not Found</h1>
-                    <p className="text-lg text-gray-700">Please check the tracking number and try again.</p>
+                    <p className="text-lg text-gray-700" style={{color: '#fff'}}>Please check the tracking number and try again.</p>
                 </div>
             </>
         );
@@ -92,7 +92,7 @@ const TrackingPage = () => {
     return (
         <>
             <Navbar />
-            <div className="min-h-screen bg-gray-100">
+            <div className=" thatPad min-h-screen bg-gray-100 ">
                 <div className="max-w-6xl mx-auto py-10 px-6">
                     {/* Shipment Status */}
                     <h1 className="text-4xl font-bold text-[#0c0e37] mb-4">Shipment Status: {trackingInfo.status}</h1>

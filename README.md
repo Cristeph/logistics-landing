@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Cristeph Logistics — Web App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Customer-facing website, shipment tracking and customer/admin dashboards for Cristeph Logistics.
+Talks to [`logistics-api`](https://github.com/Cristeph/logistics-api).
 
-## Available Scripts
+Built with React 19, React Router 7, Vite and Tailwind CSS 4.
 
-In the project directory, you can run:
+## Branches
 
-### `npm start`
+| Branch   | Purpose                                                        |
+|----------|----------------------------------------------------------------|
+| `dev`    | All development. Branch features off `dev`, open PRs into `dev`. |
+| `deploy` | Production. Only updated by merging `dev` → `deploy` via PR; Netlify builds from this branch. |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+npm install
+cp .env.example .env.local
+npm run dev            # http://localhost:5173
+```
 
-### `npm test`
+`/api/*` is proxied to `VITE_API_PROXY` in development (and rewritten by `public/_redirects` on
+Netlify), so the browser always talks to the API on the same origin. That is what lets the API use
+an `httpOnly` session cookie instead of keeping tokens in `localStorage`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To work fully offline, run the API against an in-memory database with demo data
+(`npm run dev:memory` in `logistics-api`) and set `VITE_API_PROXY=http://localhost:8080`.
 
-### `npm run build`
+## Environment
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Variable                   | Notes |
+|----------------------------|-------|
+| `VITE_PAYSTACK_PUBLIC_KEY` | Paystack **public** key (`pk_...`). Set it in Netlify → Site settings → Environment variables. Without it, the Pay button explains that online payments aren't configured. |
+| `VITE_API_PROXY`           | Dev only: where the dev server forwards `/api`. |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Scripts
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| Script            | What it does                          |
+|-------------------|---------------------------------------|
+| `npm run dev`     | Vite dev server with HMR              |
+| `npm run build`   | Production build into `build/`        |
+| `npm run preview` | Serve the production build locally    |
+| `npm run lint`    | ESLint                                |
+| `npm test`        | Unit tests (Vitest)                   |
 
-### `npm run eject`
+## Structure
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+src/
+  components/ui/        design-system primitives (Button, Field, Modal, Table, Badge…)
+  components/layout/    public header/footer, dashboard shell, route guards
+  components/home/      landing-page sections
+  components/tracking/  progress steps, timeline, Leaflet map (lazy-loaded)
+  context/              auth session + toasts/confirm dialogs
+  hooks/                useAsync (cancellable data loading), list params in the URL, …
+  lib/                  API client, validators, formatting, Paystack, geocoding
+  pages/                public pages, customer dashboard, admin dashboard
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Security headers (CSP, HSTS, frame protection) are set in `public/_headers`.

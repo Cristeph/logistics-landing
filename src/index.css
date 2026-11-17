@@ -1,931 +1,111 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Anek+Telugu:wght@100..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Anek+Telugu:wght@100..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
-
-
+@import 'tailwindcss';
 
 @font-face {
-                    font-family: "Rency";
-                    src: url(../src/assets/fonts/rency/rency.woff2) format("woff2");
-                    font-weight: 200;
-                    font-display: swap;
-                    font-style: normal
+  font-family: 'Rency';
+  src: url('./assets/fonts/rency/rency.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Rency', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand: deep navy ink + Cristeph crimson */
+  --color-ink-50: #f3f5fa;
+  --color-ink-100: #e4e8f2;
+  --color-ink-200: #c7cfe2;
+  --color-ink-300: #9aa8c8;
+  --color-ink-400: #6a7ca6;
+  --color-ink-500: #4a5b85;
+  --color-ink-600: #36456b;
+  --color-ink-700: #263355;
+  --color-ink-800: #17223f;
+  --color-ink-900: #0b1530;
+  --color-ink-950: #060c1e;
+
+  --color-brand-50: #fdf2f2;
+  --color-brand-100: #fbe3e3;
+  --color-brand-200: #f6c4c4;
+  --color-brand-300: #ee9696;
+  --color-brand-400: #e15d5d;
+  --color-brand-500: #cc3131;
+  --color-brand-600: #b01e1e;
+  --color-brand-700: #9d1111;
+  --color-brand-800: #7c1212;
+  --color-brand-900: #661414;
+
+  --shadow-soft: 0 1px 2px rgb(11 21 48 / 0.04), 0 4px 16px -4px rgb(11 21 48 / 0.08);
+  --shadow-lift: 0 2px 4px rgb(11 21 48 / 0.04), 0 16px 40px -12px rgb(11 21 48 / 0.18);
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-fade-in: fade-in 0.25s ease-out both;
+  --animate-pop: pop 0.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes pop {
+    from { opacity: 0; transform: translateY(8px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-white font-sans text-ink-800 antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight text-ink-900;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-600;
+  }
+  ::selection {
+    @apply bg-brand-100 text-brand-900;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold tracking-[0.18em] text-brand-600 uppercase;
+  }
+}
+
+/* Scroll-reveal (see useReveal). Hidden state only applies once JS has opted in. */
+.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js-reveal [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .js-reveal [data-reveal] { opacity: 1; transform: none; }
 }
 
-@font-face {
-                    font-family: "Rency";
-                    src: url(../src/assets/fonts/rency/rency.woff2) format("woff2");
-                    font-weight: 400;
-                    font-display: swap;
-                    font-style: normal
-}
-
-@font-face {
-                    font-family: "Rency";
-                    src: url(../src/assets/fonts/rency/rency.woff2) format("woff2");
-                    font-weight: 500;
-                    font-display: swap;
-                    font-style: normal
-}
-
-
-
-@font-face {
-                    font-family: "Rency";
-                    src: url(../src/assets/fonts/rency/rency.woff2) format("woff2");
-                    font-weight: 600;
-                    font-display: swap;
-                    font-style: normal
-}
-
-@font-face {
-                    font-family: "Rency";
-                    src: url(../src/assets/fonts/rency/rency.woff2) format("woff2");
-                    font-weight: 700;
-                    font-display: swap;
-                    font-style: normal
-}
-
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-
-                    font-family:"Rency" !important;
-}
-
-body{
-                    overflow-x: hidden;
-}
-* {
-                    scroll-behavior: smooth;
-                    font-family:"Rency" !important;
-                    transition: 0.4s !important; 
-}
-
-p{
-                    color: #082552; 
-                    font-size: 1.0rem;
-                    font-weight: 400;
-                    line-height: 1.6;
-}
-.Header{
-                    font-weight: bolder;
-                    font-size: 47px;
-                    line-height: 48px;
-                    margin-bottom: 40px;
-                    color: #082552;
-
-}
-
- 
-
-
-.herosection{
-                    height: 100vh;
-                    display: flex;
-                    align-items: center;
-                    background-size: cover;
-                    position: relative;
-                    overflow: hidden; 
-                    background-position: center;
-                    background-color: transparent !important;
-                    color: #fff;
-}
-
-.background-video {
-  position: absolute;
-  object-position: center;
-  background-color: #0056b3;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  object-fit: cover; /* Ensure video covers the entire container */ 
-}
-
-.backgroundvideobefore {
- 
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.459);
-  backdrop-filter: blur(2px);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
-}
-
-.thatTopX{
-  position: absolute;  
-  left: 0;
-  right: 0;
-  margin: auto;
-
-  z-index: 9;
-}
-
-.NavBarB{
-                    position: relative;
-                    background-color: transparent;
-                    position: absolute;
-                    width: 100%;
-                    z-index: 9999999999999999;
-}
-
-.scrolledNav {
-                    position: fixed;
-                    top: 0;
-                    background-color: #ffffffb7;
-                    z-index: 99999999999999;
-                    backdrop-filter: blur(40px);
-                    transition: 0.5s;
-}
-
-
-.heroInput{
-                    background-color: #ffffff00;
-                    border: solid 2px #fff ;
-                    border-radius: 5px;
-                    padding: 15px;
-}
-
-
-
-.Heroheader{
-                    font-size: 3rem;
-                    max-width: 600px;
-                    font-weight: bolder;
-
-}
-
-.innerTopNav{
-                    justify-content: space-between;
-                    gap: 13px;
-                    color: lightgray;
-}
-
-.scrolledNav .innerTopNav{
-                    color: #082552 ;
-}
-
-.topNav{
-                    justify-content: center;
-                    align-items: center;
-                    gap: 50px;
-}
-
-
-
-.servLink{
-                    color: #9d1111;
-                    cursor: pointer;
-}
-
-.servContainer{
-                    display: flex;
-                    justify-content: space-between; 
-                    flex-wrap: wrap;;
-                    padding-top: 50px ;  
-                    padding-bottom: 50px ;
-}
-
-.serviceCont{
-                     
-                    width: 30%;
-                    min-width: 330px;
-                    margin-top: 40px;
-                    align-self: center;
-                    
-               
-}
-
-
-.servinner{
-                    width: 300px;
-                    background-color: #e3effb4b; 
-                    padding: 20px;
-}
-
-
-.header3{
-                    font-weight: bolder;
-                    font-size: 22px;
-                    line-height: 22px;
-                    margin-bottom: 15px;
-                    color: #082552;
-}
-
-
-.header2{
-                    font-weight: bolder;
-                    font-size: 27px;
-                    line-height: 48px;
-                    margin-bottom: 15px;
-                    color: #082552;
-}
-
-
-.header1{
-                    font-weight: bolder;
-                    font-size: 32px;
-                    line-height: 48px;
-                    margin-bottom: 15px;
-                    color: #082552;     
-}
-
-.headerSection{
-                    max-width: 600px;
-}
-
-.contactSection {
-                    max-width: 1200px;
-                    margin: 0 auto;
-                    justify-content: space-between;
-                    padding: 60px 20px;
-                    display: flex;
-                    flex-direction: row ;
-                    flex-wrap: wrap;
-}
-
-.iconsNotis {
-                    display: flex;
-                    justify-content: space-between;
-                    width: 200px;
-}
-
-.iconsNotis .IconsLog {
-                    color: rgb(46, 42, 42);
-                    border: solid 2px rgb(210, 210, 210);
-                    height: 40px;
-                    padding: 8px;
-                    width: 40px;
-                    border-radius: 40px;
-}
-
-.contactHeader {
-                    text-transform: capitalize;
-                    width: 250px;
-                    font-weight: bold;
-                    color: #0c263a;
-                    font-size: 25px;
-}
-
- 
-
-.contactInfo {
-                    display: flex;
-                    align-items: start;
-                    gap: 20px;
-                    margin-top: 20px;
-}
-
-.thaIcons {
-                    background-color: #e4eff9;
-                    padding: 8px;
-                    border-radius: 10px;
-                    font-size: 20px;
-}
-
-
-.contact-form-container {
-                    width: 70%;
-                    margin: 0 auto;
-                    border-radius: 8px;
-}
-
-.contact-form-container h2 {
-                    text-align: center;
-                    margin-bottom: 20px;
-                    font-size: 24px;
-}
-
-.success-message {
-                    text-align: center;
-                    color: green;
-                    margin-bottom: 15px;
-}
-
-.contact-form {
-                    display: flex;
-                    flex-direction: column;
-}
-
-.form-group {
-                    margin-bottom: 15px;
-}
-
-.form-group label {
-                    display: block;
-                    margin-bottom: 8px;
-                    font-size: 13px;
-                    padding-left: 20px;
-}
-
-.form-group input,
-.form-group textarea {
-                    outline: none;
-                    width: 100%;
-                    padding: 10px;
-                    border: 1px solid #ccc;
-                    background-color: #ffffff9f;
-                    border-radius: 4px;
-                    font-size: 16px;
-}
-
-.form-group textarea {
-                    resize: vertical;
-}
-
-.error {
-                    border-color: red;
-}
-
-.error-message {
-                    color: red;
-                    font-size: 14px;
-                    margin-top: 5px;
-}
-
-.submit-btn {
-                    padding: 10px 20px;
-                    background-color: #007BFF;
-                    color: #fff;
-                    width: 100%;
-                    border: none;
-                    border-radius: 4px;
-                    cursor: pointer;
-                    font-size: 16px;
-                    transition: background-color 0.3s ease;
-}
-
-.submit-btn:hover {
-                    background-color: #0056b3;
-}
-
-.contactformimg {
-                    height: 500px;
-                    background-image: url(../src/assets/images/livechat.png);
-                    background-position: right;
-                    background-repeat: no-repeat;
-                    min-width: 300px;
-                    order: 1 !important;
-                    background-size: contain;
-}
-
-
-.whyChoose{
-                    padding-top: 70px;
-                    padding-bottom: 70px;
-                    background-image: url(../src/assets/images/lineplane.png);
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                    background-position: 110% 100% ;
-                   
-          
-  
-}
-
-.packageHead{
-                    max-width: 600px;
-}
-
-.flexGoat{
-                    justify-content: right;
-                    display: flex;
-}
-
-
-.eachChoose{
-                   display: flex;
-                   flex-wrap: wrap;
-                   max-width: 750px;
-                   justify-content: space-between;
-                   margin-top: 80px;
-}
-
-.eachInnerChoose{
-                    width: 350px;
-                    margin-top: 39px;
-                    gap: 20px;
-}
-
-.chack{
-                    font-size: 20px;
-                    color: #6d6b6b82;
-}
-
-
-.callToAction{
-                    padding-top: 120px;
-                    padding-bottom: 120px;
-                    background-color: #9d1111;
-                    position: relative;
-                    backdrop-filter: blur(40px);
-                    text-align: center;
-                    color: #fff;
-}
-
-
-.callToAction p{
-                    color: lightgray;
-}
-
-.callToAction::after{
-                    background-color: rgba(255, 0, 0, 0);
-                    content: '';
-                    height: 100%;
-                    width: 100%;
-                    position: absolute;
-                    backdrop-filter: blur(40px);
-                    top: 0;
-                    left: 0;
-                    z-index: -1;
-}
-
-
-
-.testimonialOwnFlex{
-                    flex-wrap: wrap;
-                    display: flex;
-                    justify-content: space-between;
-                    padding-top: 60px;
-}
-.testimonialOwn{
-                    text-align: left;
-                    min-width: 300px;
-                    margin-top: 30px;
-                    background-color: #f6fbff;
-                    width: 30%;
-                    padding: 80px  20px;
-                    border: solid 1px rgba(227, 239, 255, 0.647);
-                    border-radius: 10px;
-}
-
-.testUser{
-                    display: flex;
-                    gap: 20px;
-                    align-items: center;
-
-}
-
-.quoteform{
-                    backdrop-filter: blur(40px);
-                    background-color: #ffffff41;
-                    padding-top: 50px;
-                    padding-bottom: 50px;
-}
-
-.dalabel{
-                    color: #fff;
-                    font-size: 12px;
-}
-
-.daBTN{
-                    width: 100%;
-                    font-size: 13px;
-                    margin-top: 40px;
-                    font-weight: bold;
-}
-
-.thaBtn{
-                    font-size: 14px;
-                    background-color: #ccc;
-                    padding: 20px;
-                    color: #9d1111;
-                    border-radius: 4px;
-}
-
-
-.phoneNav{
-                    display: none;
-}
-
-.thaMap{
-                    position: relative;
-                    overflow-x: hidden;
-}
-
-.thaMap::after{
-                    background-image: url(./assets/images/locatex.png);
-
-                    background-size: 100%;
-                    background-repeat: no-repeat;
-                    height: 300px;
-                    bottom: 0;
-                    left: 0;
-                    width:  300px;
-                    content: '';
-                    position: absolute; 
-
-}
-
-.thaMap::before{
-                    background-image: url(./assets/images/linesloca.png);
-
-                    background-size: 100%;
-                    background-repeat: no-repeat;
-                    height: 300px;
-                    top: 0;
-                    right:  0;
-                    width:  300px;
-                    content: '';
-                    position: absolute; 
-
-}
-
-.aboutUsCont{
-                    position: relative;
-                    overflow-x: hidden;
-}
-
-.aboutUsCont::before{
-                    background-image: url(./assets/images/linesloca.png);
-
-                    background-size: 100%;
-                    background-repeat: no-repeat;
-                    height: 400px;
-                    top: 0;
-                    right:  0;
-                    width:  400px;
-                    content: '';
-                    position: absolute; 
-
-}
-
-
-.aboutUsCont::after{
-                    content:  '';
-                    height: 400px;
-                    width:  400px;
-                    background-color: rgba(117, 117, 117, 0);
-                    position: absolute;
-                    border: solid 30px  rgba(117, 117, 117, 0.138);;
-                    top: -100px;  
-                    left: 20%;
-                    border-radius: 1000px;
-                    transform: rotate(45deg); 
-
-}
-
-.whyChoose{
-                    position: relative;
-                    overflow: hidden;
-}
-
-.whyChoose::after{
-                    background-image: url(./assets/images/locatex.png);
-
-                    background-size: 100%;
-                    background-repeat: no-repeat;
-                    height: 400px;
-                    bottom: 0;
-                    left: 0;
-                    width:  400px;
-                    content: '';
-                    position: absolute; 
-
-}
- 
-/* WebKit Browsers (Chrome, Safari, etc.) */
-::-webkit-scrollbar {
-                    width: 12px;
-                    height: 12px; /* For horizontal scrollbar */
-                  }
-                  
-                  ::-webkit-scrollbar-track {
-                    background: #44404000; /* Color of the scrollbar track */
-                    border-radius: 10px;
-                  }
-                  
-                  ::-webkit-scrollbar-thumb {
-                    background-color: #88888800; /* Color of the scrollbar thumb */
-                    border-radius: 10px;
-                    border: 3px solid #f1f1f100; /* Adds padding around the thumb */
-                  }
-                  
-                  ::-webkit-scrollbar-thumb:hover {
-                    background: #555; /* Color when hovering over the scrollbar */
-                  }
-                  
-                  /* Firefox Browsers */
-                  html {
-                    scrollbar-width: thin; /* Options: auto, thin */
-                    scrollbar-color: #888 #f1f1f100; /* thumb color track color */
-                  }
-                  
-
-.globalLocat{
-                    width: 100%;
-
-     
-}
-
-.globalLocat h1{
-                    max-width: 380px;
-}
-
- 
-
-
-.iconLocate{
-                    height: 40px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: #082652ca;
-                    color: #fff;
-                    border-radius: 4px;
-                    font-size: 30px;
-                    width: 40px !important;
-}
-
- .lineheeight{
-                
-                    margin-top: 0;
- }
-
-
-
-
-
- .thalocbody{
-                    width: 200px; 
- }
-
- .thalocbody p{
-                    font-size: 14px;
- }
-
-
- .servinner .header3{
-                    margin-bottom: 8px;
- }
-
- .aboutUsCont{
-                    padding-top: 100px;
-                    padding-bottom: 100px;
- }
-
- .fullbodyAuth{
-                    background-size: cover;
-                    height: 100vh ; 
- }
-
-
- .fullbodyAuth::after{
-                    content: '';
-                    width: 100%;
-                    height: 100%;
-                    position: absolute;
-                    background-color: rgba(37, 37, 37, 0);
-                    backdrop-filter: blur(10px);
-                    
- }
-
- .formThing{
-                    position: absolute;
-                    z-index: 99;
-                    background-color: #ffffff15;
-           border: solid 1px rgba(243, 243, 243, 0.33);
-
-                    backdrop-filter: blur(10px);
- }
-
-
-
-
- .chrisInput{
-                    background-color: #ffffff23;
-                    backdrop-filter: blur(20px);
-                    color: #141414;
-                    border: none;
-                    outline: none;
-                    padding: 15px 10px;
-                    padding-right: 40px;
- }
-
- .chrisInputLabel{
-                    font-size: 10px;
-                    color: #fff;
-                    margin-bottom: 10px;
-                    margin-left: 15px;
- }
-
- .subBtn{
-                    padding: 15px 40px;
-                    background-color: #9d11117a;
-                    border: solid 1px rgba(147, 117, 117, 0.33);
- }
-
- .navbarxs{
-                    position: absolute;
-                    z-index: 99999999999;
-                    top: 0
- }
-
-.tabContAuth{ 
-                    border-radius: 60px;
-                    margin-bottom: 30px;
-                    backdrop-filter: blur(15px);
-                    background-color: #9d11117a;
-                    position: relative;
-                    justify-content: space-around;
-                    border: solid 1px rgba(147, 117, 117, 0.33);
-                    overflow: hidden; 
-                    align-items: center;
-                    padding: 10px;
-}
-
- 
-.forgot{
-                    color: #fff;
-}
-
-.tabContAuthafter{
-                    position: absolute;
-                    content: "";
-                    height: 80%;
-                    bottom: 0;
-                    margin: auto;
-                    width: 50%;
-                    background-color: #fff;
-                    top: 0;  
-                    border-radius: 50px;
-                    z-index: 1;
-}
-
-.tableft{ 
-                    transform: translate(-48%); 
-}
-
-.tabright{ 
-                    transition: 4s;
-                    transform: translate(48%); 
-
-}
-
-.innerTabs{
-                    width: 100%; 
-                    justify-content: space-around;
-                    z-index:  99999999999999999;
-}
-
-.tabBtn{
-                    width: 50%; 
-                    font-weight: 500;
-                    color: rgb(211, 211, 211);
-}
-
-.tabActive{
-                    color: #9d1111;
-}
-
-.passInput{
-                    position: relative;
-}
-
-.passsIcon{
-                    position: absolute; 
-                    bottom: 0;
-                    bottom: 0; 
-                    cursor: pointer;
-                    display: flex;
-                    justify-content: center;
-                    width: 40px;
-                    font-weight: bold;
-                    font-size: 20px;
-                    z-index: 99;
-                    right: 0;
-                    height:  60px;
-                    align-items: center;
-                    margin: auto;
-}
-
-
-.thatPad{
-  background-color: rgb(74, 74, 74) !important;
-  padding-top: 120px;
-}
-
-@media (max-width: 968px) {
-                    .whyChoose{
-                                        padding-top: 70px;
-                                        padding-bottom: 70px;
-                                        background-image: url(../src/assets/images/lineplane.png);
-                                        background-size: contain;
-                                        background-repeat: no-repeat;
-                                        background-position: 240% 100% ;
-                              
-                      
-                    }
-}
-@media (max-width: 768px) {
-                    .testimonialOwn{
-                                        text-align: left;
-                                        min-width: 310px;
-                                       
-                                        background-color: #f6fbff;
-                                        width: 30%;
-                                        padding: 80px  20px;
-                                        border: solid 1px rgba(227, 239, 255, 0.647);
-                                        border-radius: 10px;
-                                        margin: auto;
-
-                                        margin-top: 30px;
-                    }
-
-                    .testimonialOwn p{
-                                        font-size: 13px;
-                    }
-
-                    .contactformimg{
-                                        width: 400px;
-                                        background-size: cover;
-                                        background-position: left;
-                    }
-                    .serviceCont{
-                     
-                                        width: 30%;
-                                        min-width: 300px;
-                                        margin: auto;
-                                        margin-top: 40px;
-                                        align-self: center;
-                                        
-                                   
-                    }
-                    
-                    
-                    .servinner{
-                                        width: 300px;
-                                        margin: auto;
-                                        background-color: #e3effb4b; 
-                                        padding: 20px;
-                    }
-
-                    
- 
-                    .whyChoose{
-                                        padding-top: 70px;
-                                        padding-bottom: 70px;
-                                        background-image: url(../src/assets/images/lineplane.png);
-                                        background-size: contain;
-                                        background-repeat: no-repeat;
-                                        background-position: 240px 100% ;
-                              
-                      
-                    }
-
-
-                    .topNav{
-                                        display: none;
-                    }
-
-                    .phoneNav{
-                                        position: fixed;
-                                        height: 100vh;
-                                        background-color: #9d1111;
-                                        display: flex; 
-                                        align-items: center;
-                                        padding: 40px;
-                                        top: 0;
-                                        transform: translate(140%);
-                                        z-index: 9999999999999999999999999;
-                                        width: 100vw;
-                    }
-
-                    .openNavg{
-                                        transform: translate(0);
-                    }
-                    .Header{
-                                        font-size: 2.4rem;
-                                        line-height: 2.4rem;
-
-                    }
-
-                    .Heroheader{
-                                        font-size: 3.0rem;
-                                        line-height: 3.0rem;
-                    }
-
-                    .phoneNav .innerTopNav li{
-                                        margin-bottom: 40px;
-                                        color: #fff;
-                    }
-
-
-                    .CloseIc{
-                                        color: #fff;
-                                        position: absolute;
-                                        top: 20px;
-                                        right: 20px;
-                    }
-}
+/* Leaflet sits under our sticky header and modals */
+.leaflet-container { z-index: 0; font-family: inherit; }
